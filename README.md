@@ -29,11 +29,10 @@ react-native link react-native-streetview
 	It's important you add the API key to your application's app delegate. don't skip this part.
 
 2. Now, set GoogleMaps SDK dir on search path for NSTStreetView library target:  
-	On your project tree, expand 'Libraries' group.  
-	Click NSTStreetView.xcodeproj. (which was linked to your project with `react-native link react-native-streetview`)
-	Choose 'Build Settings' tab.  
-	Edit 'Framework Search Paths'. Replace <GOOGLE-MAPS-DIR> with your own directory location for GoogleMaps SDK
-	(which you installed on step 1).  
+	a. On your project tree, expand 'Libraries' group.  
+	b. Click NSTStreetView.xcodeproj (which was linked to your project with `react-native link react-native-streetview`).  
+	c. Choose 'Build Settings' tab.  
+	d. Edit 'Framework Search Paths'. Replace &lt;GOOGLE-MAPS-DIR&gt; with your own directory location for GoogleMaps SDK (which you installed on step 1).  
 
 3. Follow JS usage below and hit  
 	```
