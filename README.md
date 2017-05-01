@@ -3,6 +3,8 @@
 
 React Native Google's Panorama/StreetView component for iOS and Android.
 
+![](http://i.imgur.com/PTFla6o.png)&emsp;&emsp;![](http://i.imgur.com/O3uzwrC.png)
+
 ## Installation
 
 Download the library from npm:
@@ -21,17 +23,17 @@ react-native link react-native-streetview
 
 ### iOS
 
-1. First, follow Google instruction for installing GoogleMaps SDK for iOS:
+1. First, follow Google instructions for installing GoogleMaps SDK for iOS:
 		https://developers.google.com/maps/documentation/ios-sdk/start
 
 	It's important you add the API key to your application's app delegate. don't skip this part.
 
-2. Now, provide GoogleMaps SDK as search path for the NSTStreetView library target:  
-	On your project tree, expand 'Libraries'.  
-	Click NSTStreetView.xcodeproj.  
+2. Now, set GoogleMaps SDK dir on search path for NSTStreetView library target:  
+	On your project tree, expand 'Libraries' group.  
+	Click NSTStreetView.xcodeproj. (which was linked to your project with `react-native link react-native-streetview`)
 	Choose 'Build Settings' tab.  
-	Edit 'Framework Search Paths'. Replace '<GOOGLE-MAPS-DIR>' with your own directory location for GoogleMaps SDK
-	(which you installed on previous step).  
+	Edit 'Framework Search Paths'. Replace <GOOGLE-MAPS-DIR> with your own directory location for GoogleMaps SDK
+	(which you installed on step 1).  
 
 3. Follow JS usage below and hit  
 	```
@@ -96,11 +98,12 @@ const styles = StyleSheet.create({
 ```
 
 ## Roadmap and help?
-I had to quickly wrap this component up to have Street View ability in our Home renting app, [Nester](nester.co.il).
+I had to quickly wrap up this component to have Street View ability in our Home renting app, [Nester](http://nester.co.il).
 So, currently providing only two props that we needed.  
-There is much to go forward, with camera and heading setup, markers, etc. We will gradually add those in the next few weeks.
+There is much to go forward, with camera and heading setup, markers, etc. We will gradually add those in the next releases.
 Feel free to fork and submit PR's. We will really appriciate any effort, especially on Android ;(  
 
 #### Contact
 Amit Palomo <amit@nester.co.il>  
-Rafael Bodill <rafi@nester.co.il>
+Rafael Bodill <rafi@nester.co.il>  
+© 2017 Nester.co.il

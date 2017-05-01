@@ -18,7 +18,7 @@ const propTypes = {
 		longitude: React.PropTypes.number.isRequired,
 	}),
 
-	// Allowing user gestures (panning, zomming)
+	// Allowing user gestures (panning, zooming)
 	allGesturesEnabled: React.PropTypes.bool,
 };
 
