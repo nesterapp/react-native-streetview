@@ -19,8 +19,6 @@ Link the native dependencies:
 react-native link react-native-streetview
 ```
 
-   >This installation should work in physical devices and iOS Simulator. For Genymotion, be sure to check Android installation about Google Play Services
-
 ### iOS
 
 1. First, follow Google instructions for installing GoogleMaps SDK for iOS:
@@ -47,10 +45,10 @@ react-native link react-native-streetview
 
    ```xml
    <application>
-       <!-- You will only need to add this meta-data tag, but make sure it's a child of application -->
-       <meta-data
-         android:name="com.google.android.geo.API_KEY"
-         android:value="Your Google maps API Key Here"/>
+     <!-- You will only need to add this meta-data tag, but make sure it's a child of application -->
+     <meta-data
+       android:name="com.google.android.geo.API_KEY"
+       android:value="Your Google maps API Key Here"/>
    </application>
    ```
 
@@ -58,6 +56,8 @@ react-native link react-native-streetview
 	```
 	react-native run-android && react-native log-android
 	```
+
+   >This installation should work in physical devices and iOS Simulator. For Genymotion, be sure to check Android installation about Google Play Services
 
 ## Usage
 
@@ -69,40 +69,57 @@ import StreetView from 'react-native-streetview';
 ### Add StreetView component
 ```javascript
 <View style={styles.container}>
-	<StreetView
-		style={styles.streetView}
-		allGesturesEnabled={true}
-		coordinate={{
-			'latitude': -33.852,
-			'longitude': 151.211
-		}}
-	/>
+  <StreetView
+    style={styles.streetView}
+    allGesturesEnabled={true}
+    coordinate={{
+      'latitude': -33.852,
+      'longitude': 151.211
+    }}
+  />
 </View>
 ```
 
 ### Use position absolute for layout
 ```javascript
 const styles = StyleSheet.create({
-	container: {
-		height: 400
-	},
-	streetView: {
-		position: 'absolute',
-		top: 0,
-		left: 0,
-		right: 0,
-		bottom: 0,
-	},
+  container: {
+    height: 400
+  },
+  streetView: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
 });
 ```
 
 ## Roadmap and help?
-I had to quickly wrap up this component to have Street View ability in our Home renting app, [Nester](http://nester.co.il).
-So, currently providing only two props that we needed.  
+I had to quickly wrap up this component to have Street View ability in our Home Renting app, [Nester](http://nester.co.il).
+So, currently providing only two props that we actually needed.  
 There is much to go forward, with camera and heading setup, markers, etc. We will gradually add those in the next releases.
-Feel free to fork and submit PR's. We will really appriciate any effort, especially on Android ;(  
+Feel free to fork and submit PR's. We'll really appriciate any effort, especially on Android ;(  
 
 #### Contact
 Amit Palomo <amit@nester.co.il>  
 Rafael Bodill <rafi@nester.co.il>  
-© 2017 Nester.co.il
+
+License
+--------
+
+     Copyright (c) 2017 Nester.co.il
+
+     Licensed under the The MIT License (MIT) (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+        https://raw.githubusercontent.com/nesterapp/react-native-streetview/master/LICENSE
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
