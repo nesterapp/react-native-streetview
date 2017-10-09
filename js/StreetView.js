@@ -7,19 +7,20 @@
 //
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, requireNativeComponent } from 'react-native';
 
 const propTypes = {
 	...View.propTypes,
 
 	// Center point
-	coordinate: React.PropTypes.shape({
-		latitude: React.PropTypes.number.isRequired,
-		longitude: React.PropTypes.number.isRequired,
+	coordinate: PropTypes.shape({
+		latitude: PropTypes.number.isRequired,
+		longitude: PropTypes.number.isRequired,
 	}),
 
 	// Allowing user gestures (panning, zooming)
-	allGesturesEnabled: React.PropTypes.bool,
+	allGesturesEnabled: PropTypes.bool,
 };
 
 class StreetView extends React.Component {
