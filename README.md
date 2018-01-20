@@ -7,8 +7,6 @@ React Native Google's Panorama/StreetView component for iOS and Android.
 
 ## Installation
 
-Download the library from npm:
-
 ```
 npm install react-native-streetview --save
 ```
@@ -21,24 +19,29 @@ react-native link react-native-streetview
 
 ### iOS
 
-1. First, follow Google instructions for installing GoogleMaps SDK for iOS:
+1. Install GoogleMaps SDK for iOS using CocoaPods:
 		https://developers.google.com/maps/documentation/ios-sdk/start
 
-	It's important you add the API key to your application's app delegate. don't skip this part.
+2. Specify your Google Maps API Key:
+    > Go to https://console.developers.google.com/apis/credentials to check your credentials.
+ 
+   Add your API key to your AppDelegate file:
 
-2. Now, set GoogleMaps SDK dir on search path for NSTStreetView library target:  
-	a. On your project tree, expand 'Libraries' group.  
-	b. Click NSTStreetView.xcodeproj (which was linked to your project with `react-native link react-native-streetview`).  
-	c. Choose 'Build Settings' tab.  
-	d. Edit 'Framework Search Paths'. Replace &lt;GOOGLE-MAPS-DIR&gt; with your own directory location for GoogleMaps SDK (which you installed on step 1).  
+	```
+	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+	{
+		[GMSServices provideAPIKey:@"YOUR-API-KEY-HERE"];
+	```
 
-3. Follow JS usage below and hit  
+3. Run  
 	```
 	react-native run-ios && react-native log-ios
 	```
 
 ### Android
-1. Specify your Google Maps API Key:
+1. Install Google Play services using SDK Manager in Android Studio
+
+2. Specify your Google Maps API Key:
     > Go to https://console.developers.google.com/apis/credentials to check your credentials.
 
    Add your API key to your manifest file (`android\app\src\main\AndroidManifest.xml`):
@@ -52,7 +55,7 @@ react-native link react-native-streetview
    </application>
    ```
 
-2. Follow JS usage below and hit  
+3. Run  
 	```
 	react-native run-android && react-native log-android
 	```
@@ -84,7 +87,7 @@ import StreetView from 'react-native-streetview';
 ```javascript
 const styles = StyleSheet.create({
   container: {
-    height: 400
+    flex: 1
   },
   streetView: {
     position: 'absolute',
