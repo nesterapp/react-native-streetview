@@ -98,6 +98,41 @@ const styles = StyleSheet.create({
   },
 });
 ```
+## Example
+
+The 'example' folder contains a fully working example for iOS and Android.  
+To run the example on iOS do the following:  
+
+```
+$ cd example
+$ yarn install
+$ cd ios
+$ pod install
+$ open example.xcworkspace
+```
+
+Edit AppDelegate.m to add your API key:
+`[GMSServices provideAPIKey:@"YOUR-API-KEY-HERE"];`
+
+```
+$ react-native run-ios
+```
+
+To run the example on Android do the following:
+
+```
+$ cd example
+$ yarn install
+$ cd android/app/src/main/
+```
+
+Edit AndroidManifest.xml to add your API key:
+`android:value="Your Google maps API Key Here"/>`
+
+```
+$ cd ../../../../
+$ react-native run-android
+```
 
 ## Roadmap and help?
 I had to quickly wrap up this component to have Street View ability in our Home Renting app, [Nester](http://nester.co.il).
