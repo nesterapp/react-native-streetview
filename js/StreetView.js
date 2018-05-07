@@ -17,6 +17,8 @@ const propTypes = {
 	coordinate: PropTypes.shape({
 		latitude: PropTypes.number.isRequired,
 		longitude: PropTypes.number.isRequired,
+		// Search radius (meters) around coordinate.
+		radius: PropTypes.number,
 	}),
 
 	// Allowing user gestures (panning, zooming)
