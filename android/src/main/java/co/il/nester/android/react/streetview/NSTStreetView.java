@@ -21,6 +21,8 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
     private StreetViewPanorama panorama;
     private Boolean allGesturesEnabled = true;
     private LatLng coordinate = null;
+    // default value
+    private int radius = 50;
 
     public NSTStreetView(Context context) {
         super(context);
@@ -35,7 +37,7 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
         this.panorama = panorama;
         this.panorama.setPanningGesturesEnabled(allGesturesEnabled);
         if (coordinate != null) {
-            this.panorama.setPosition(coordinate);
+            this.panorama.setPosition(coordinate, radius);
         }
     }
 
@@ -49,6 +51,9 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
         if (coordinate == null ) return;
         Double lng = coordinate.getDouble("longitude");
         Double lat = coordinate.getDouble("latitude");
+
+        // saving radius
+        this.radius = coordinate.hasKey("radius") ? coordinate.getInt("radius") : 50;
 
         // Saving to local variable as panorama may not be ready yet (async)
         this.coordinate = new LatLng(lat, lng);
