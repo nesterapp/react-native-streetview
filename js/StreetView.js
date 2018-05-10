@@ -23,6 +23,9 @@ const propTypes = {
 
 	// Allowing user gestures (panning, zooming)
 	allGesturesEnabled: PropTypes.bool,
+
+	onError: PropTypes.func,
+	onSuccess: PropTypes.func
 };
 
 class StreetView extends React.Component {
