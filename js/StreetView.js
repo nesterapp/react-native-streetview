@@ -41,4 +41,11 @@ class StreetView extends React.Component {
 
 StreetView.propTypes = propTypes;
 
-module.exports = requireNativeComponent('NSTStreetView', StreetView);
+const cfg = {
+    nativeOnly: {
+        onError: true,
+        onSuccess: true,
+    }
+};
+
+module.exports = requireNativeComponent('NSTStreetView', StreetView, cfg);
