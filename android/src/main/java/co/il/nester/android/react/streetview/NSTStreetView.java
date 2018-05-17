@@ -17,6 +17,7 @@ import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.StreetViewPanoramaView;
+import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
 import com.google.android.gms.maps.model.StreetViewPanoramaLocation;
 
 import android.content.Context;
@@ -44,6 +45,17 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
 
         final EventDispatcher eventDispatcher = ((ReactContext) getContext())
                 .getNativeModule(UIManagerModule.class).getEventDispatcher();
+
+        this.panorama.setOnStreetViewPanoramaCameraChangeListener(new StreetViewPanorama.OnStreetViewPanoramaCameraChangeListener() {
+            @Override
+            public void onStreetViewPanoramaCameraChange(StreetViewPanoramaCamera streetViewPanoramaCamera) {
+                if (!(streetViewPanoramaCamera.bearing >= 0 ) && coordinate != null) {
+                    eventDispatcher.dispatchEvent(
+                            new NSTStreetViewEvent(getId(), NSTStreetViewEvent.ON_ERROR)
+                    );
+                }
+            }
+        });
 
         panorama.setOnStreetViewPanoramaChangeListener(new StreetViewPanorama.OnStreetViewPanoramaChangeListener() {
             @Override
