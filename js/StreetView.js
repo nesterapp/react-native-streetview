@@ -22,6 +22,8 @@ const propTypes = {
 	// Allowing user gestures (panning, zooming)
 	allGesturesEnabled: PropTypes.bool,
 
+	heading: PropTypes.number,
+
 	onError: PropTypes.func,
 	onSuccess: PropTypes.func
 };
