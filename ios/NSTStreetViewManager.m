@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <React/RCTViewManager.h>
 #import <React/RCTConvert+CoreLocation.h>
-
+#import "NSTStreetView.h"
 @import GoogleMaps;
 
 @interface NSTStreetViewManager : RCTViewManager
@@ -19,16 +19,23 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_CUSTOM_VIEW_PROPERTY(coordinate, CLLocationCoordinate, GMSPanoramaView) {
+RCT_CUSTOM_VIEW_PROPERTY(coordinate, CLLocationCoordinate, NSTStreetView) {
   if (json == nil) return;
-
   [view moveNearCoordinate:[RCTConvert CLLocationCoordinate2D:json]];
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(heading, CLLocationDegrees, NSTStreetView) {
+  if (json == nil) return;
+  view.camera = [GMSPanoramaCamera cameraWithHeading:[RCTConvert CLLocationDegrees:json] pitch:0 zoom:1];
+}
+
 RCT_EXPORT_VIEW_PROPERTY(allGesturesEnabled, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(onError, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onSuccess, RCTDirectEventBlock);
 
 - (UIView *)view {
-  GMSPanoramaView *panoView = [[GMSPanoramaView alloc] initWithFrame:CGRectZero];
+  NSTStreetView *panoView = [[NSTStreetView alloc] initWithFrame:CGRectZero];
+  panoView.delegate = panoView;
   return panoView;
 }
 
