@@ -17,6 +17,8 @@ const propTypes = {
 	coordinate: PropTypes.shape({
 		latitude: PropTypes.number.isRequired,
 		longitude: PropTypes.number.isRequired,
+		// Search radius (meters) around coordinate.
+		radius: PropTypes.number,
 	}),
 
 	// Allowing user gestures (panning, zooming)
@@ -41,4 +43,11 @@ class StreetView extends React.Component {
 
 StreetView.propTypes = propTypes;
 
-module.exports = requireNativeComponent('NSTStreetView', StreetView);
+const cfg = {
+    nativeOnly: {
+        onError: true,
+        onSuccess: true,
+    }
+};
+
+module.exports = requireNativeComponent('NSTStreetView', StreetView, cfg);
