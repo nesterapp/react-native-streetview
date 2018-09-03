@@ -8,7 +8,7 @@ React Native Google's Panorama/StreetView component for iOS and Android.
 ## Installation
 
 ```
-npm install react-native-streetview --save
+yarn add react-native-streetview
 ```
 
 Link the native dependencies:
@@ -22,10 +22,8 @@ react-native link react-native-streetview
 1. Install GoogleMaps SDK for iOS using CocoaPods:
 		https://developers.google.com/maps/documentation/ios-sdk/start
 
-2. Specify your Google Maps API Key:
+2. Add your API key to AppDelegate:
     > Go to https://console.developers.google.com/apis/credentials to check your credentials.
- 
-   Add your API key to your AppDelegate file:
 
 	```
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -33,34 +31,22 @@ react-native link react-native-streetview
 		[GMSServices provideAPIKey:@"YOUR-API-KEY-HERE"];
 	```
 
-3. Run  
-	```
-	react-native run-ios && react-native log-ios
-	```
-
 ### Android
 1. Install Google Play services using SDK Manager in Android Studio
 
-2. Specify your Google Maps API Key:
+2. Add your API key to Manifest file (`android\app\src\main\AndroidManifest.xml`):
     > Go to https://console.developers.google.com/apis/credentials to check your credentials.
-
-   Add your API key to your manifest file (`android\app\src\main\AndroidManifest.xml`):
 
    ```xml
    <application>
      <!-- You will only need to add this meta-data tag, but make sure it's a child of application -->
      <meta-data
        android:name="com.google.android.geo.API_KEY"
-       android:value="Your Google maps API Key Here"/>
+       android:value="YOUR-API-KEY-HERE"/>
    </application>
    ```
 
-3. Run  
-	```
-	react-native run-android && react-native log-android
-	```
-
-   >This installation should work in physical devices and iOS Simulator. For Genymotion, be sure to check Android installation about Google Play Services
+>This installation should work in physical devices and iOS Simulator. For Genymotion, be sure to check Android installation about Google Play Services
 
 ## Usage
 
@@ -98,6 +84,18 @@ const styles = StyleSheet.create({
   },
 });
 ```
+> Notice: if you are using [react-navigation](https://github.com/react-navigation/react-navigation). There is a known bug where a black window appears upon dismissal
+of StreetView's container screen - if it was deployed on full screen.
+A workaround solution is to bound StreetView with some margins.
+See [issue 12](https://github.com/nesterapp/react-native-streetview/issues/12)
+
+## Properties
+Prop                  | Type     | Default              | Description
+--------------------- | -------- | -------------------- | -----------
+allGesturesEnabled    | bool     | true               | Enables user interaction (orientation, zoom, navigation)
+coordinate            | shape | null                     |  Request panorama near the coordinate
+radius                | number   | 50                     |  Specify a search radius, in meters, around the coordinate
+
 ## Example
 
 The 'example' folder contains a fully working example for iOS and Android.  
@@ -105,10 +103,9 @@ To run the example on iOS do the following:
 
 ```
 $ cd example
-$ yarn install
+$ yarn
 $ cd ios
 $ pod install
-$ open example.xcworkspace
 ```
 
 Edit AppDelegate.m to add your API key:
@@ -122,21 +119,18 @@ To run the example on Android do the following:
 
 ```
 $ cd example
-$ yarn install
-$ cd android/app/src/main/
+$ yarn
 ```
 
 Edit AndroidManifest.xml to add your API key:
-`android:value="Your Google maps API Key Here"/>`
+`android:value="YOUR-API-KEY-HERE"/>`
 
 ```
-$ cd ../../../../
 $ react-native run-android
 ```
 
 ## Roadmap and help?
-I had to quickly wrap up this component to have Street View ability in our Home Renting app, [Nester](http://nester.co.il).
-So, currently providing only two props that we actually needed.  
+This component was built to have Street View ability in our Home Renting app, [Nester](http://nester.co.il).
 There is much to go forward, with camera and heading setup, markers, etc. We will gradually add those in the next releases.
 Feel free to fork and submit PR's. We'll really appriciate any effort, especially on Android ;(  
 
@@ -147,7 +141,7 @@ Rafael Bodill <rafi@nester.co.il>
 License
 --------
 
-     Copyright (c) 2017 Nester.co.il
+     Copyright (c) 2018 Nester.co.il
 
      Licensed under the The MIT License (MIT) (the "License");
      you may not use this file except in compliance with the License.
@@ -160,4 +154,3 @@ License
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
-
