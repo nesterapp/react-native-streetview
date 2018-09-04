@@ -37,6 +37,25 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
         super.getStreetViewPanoramaAsync(this);
     }
 
+    private final Runnable measureAndLayout = new Runnable() {
+        @Override
+        public void run() {
+          measure(
+              MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.EXACTLY),
+              MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.EXACTLY));
+          layout(getLeft(), getTop(), getRight(), getBottom());
+        }
+      };
+
+    @Override
+    public void requestLayout() {
+      super.requestLayout();
+  
+      // Required for correct requestLayout
+      // H/T https://github.com/facebook/react-native/issues/4990#issuecomment-180415510
+      post(measureAndLayout);
+    }
+
     @Override
     public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
 
