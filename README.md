@@ -65,6 +65,11 @@ import StreetView from 'react-native-streetview';
       'latitude': -33.852,
       'longitude': 151.211
     }}
+    pov={{
+      tilt:parseFloat(90),
+      bearing:parseFloat(250),
+      zoom:parseInt(1)
+    }}
   />
 </View>
 ```
