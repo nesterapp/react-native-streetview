@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <React/RCTViewManager.h>
-@import GoogleMaps;
+#import <GoogleMaps/GoogleMaps.h>
 
 @interface NSTStreetView : GMSPanoramaView <GMSPanoramaViewDelegate>
 @property (nonatomic,copy) RCTDirectEventBlock onError;
