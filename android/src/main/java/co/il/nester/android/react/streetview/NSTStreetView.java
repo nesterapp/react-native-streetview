@@ -65,7 +65,7 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
         this.panorama = panorama;
         this.panorama.setPanningGesturesEnabled(allGesturesEnabled);
 
-        /*final EventDispatcher eventDispatcher = ((ReactContext) getContext())
+        final EventDispatcher eventDispatcher = ((ReactContext) getContext())
                 .getNativeModule(UIManagerModule.class).getEventDispatcher();
 
         this.panorama.setOnStreetViewPanoramaCameraChangeListener(new StreetViewPanorama.OnStreetViewPanoramaCameraChangeListener() {
@@ -92,11 +92,13 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
                     );
                 }
             }
-        });*/
+        });
+        
         if (coordinate != null) {
             this.panorama.setPosition(coordinate, radius);
         }
-        long duration = 1000;
+        
+       long duration = 1000;
        if (bearing > 0) {
              StreetViewPanoramaCamera camera = new StreetViewPanoramaCamera.Builder()
            .zoom(zoom)
