@@ -137,5 +137,16 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
         tilt = (float) pov.getDouble("tilt");
         bearing = (float) pov.getDouble("bearing");
         zoom = pov.getInt("zoom");
+
+        long duration = 1000;
+         if (bearing > 0 && this.started) {
+             StreetViewPanoramaCamera camera = new StreetViewPanoramaCamera.Builder()
+             .zoom(zoom)
+             .tilt(tilt)
+             .bearing(bearing)
+             .build();
+             panorama.animateTo(camera,duration);
+          }
+
     }
 }
