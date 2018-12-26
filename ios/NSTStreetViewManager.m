@@ -21,6 +21,7 @@ RCT_EXPORT_MODULE()
 
 RCT_CUSTOM_VIEW_PROPERTY(coordinate, CLLocationCoordinate, NSTStreetView) {
   if (json == nil) return;
+
   NSInteger radius = [[json valueForKey:@"radius"] intValue];
   if(radius == 0){
     radius = 50;

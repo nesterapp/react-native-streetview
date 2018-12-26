@@ -42,14 +42,17 @@ public class NSTStreetViewManager extends SimpleViewManager<NSTStreetView> {
     public void setCoordinate(NSTStreetView view, ReadableMap coordinate) {
         view.setCoordinate(coordinate);
     }
-
+    @ReactProp(name = "pov")
+        public void setPov(NSTStreetView view, ReadableMap pov) {
+            view.setPov(pov);
+        }
 
     @Override
     public @Nullable
     Map getExportedCustomDirectEventTypeConstants() {
         return MapBuilder.of(
-                NSTStreetViewEvent.eventNameForType(NSTStreetViewEvent.ON_ERROR), MapBuilder.of("registrationName", "onError"),
-                NSTStreetViewEvent.eventNameForType(NSTStreetViewEvent.ON_SUCCESS), MapBuilder.of("registrationName", "onSuccess")
+                NSTStreetViewEvent.eventNameForType(NSTStreetViewEvent.ON_ERROR), MapBuilder.of("registrationName", "onStreetViewError"),
+                NSTStreetViewEvent.eventNameForType(NSTStreetViewEvent.ON_SUCCESS), MapBuilder.of("registrationName", "onStreetViewSuccess")
         );
     }
 }

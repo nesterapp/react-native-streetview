@@ -15,12 +15,16 @@ const propTypes = {
 
 	// Center point
 	coordinate: PropTypes.shape({
-		latitude: PropTypes.number.isRequired,
-		longitude: PropTypes.number.isRequired,
-		// Search radius (meters) around coordinate.
-		radius: PropTypes.number,
+	   latitude: PropTypes.number.isRequired,
+	   longitude: PropTypes.number.isRequired,
+	   // Search radius (meters) around coordinate.
+	   radius: PropTypes.number,
 	}),
-
+	pov: PropTypes.shape({
+	   tilt: PropTypes.number.isRequired,
+	   bearing: PropTypes.number.isRequired,
+	   zoom: PropTypes.number.isRequired,
+	}),
 	// Allowing user gestures (panning, zooming)
 	allGesturesEnabled: PropTypes.bool,
 
