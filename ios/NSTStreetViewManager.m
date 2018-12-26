@@ -21,7 +21,14 @@ RCT_EXPORT_MODULE()
 
 RCT_CUSTOM_VIEW_PROPERTY(coordinate, CLLocationCoordinate, NSTStreetView) {
   if (json == nil) return;
-  [view moveNearCoordinate:[RCTConvert CLLocationCoordinate2D:json]];
+
+  NSInteger radius = [[json valueForKey:@"radius"] intValue];
+  if(radius == 0){
+    radius = 50;
+  }
+
+  [view moveNearCoordinate:[RCTConvert CLLocationCoordinate2D:json]
+                    radius: radius];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(heading, CLLocationDegrees, NSTStreetView) {
