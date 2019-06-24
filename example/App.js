@@ -20,7 +20,8 @@ import StreetView from 'react-native-streetview'
 
 const location = {
 	'latitude': 37.809473,
-	'longitude': -122.476140
+	'longitude': -122.476140,
+	'radius': 50
 }
 
 // const instructions = Platform.select({
