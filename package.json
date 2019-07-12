@@ -1,7 +1,7 @@
 
 {
 	"name": "react-native-streetview",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"description": "Google Panorama/StreetView component for React Native",
 	"author": "Amit Palomo <amit@nester.co.il>",
 	"license": "MIT",
