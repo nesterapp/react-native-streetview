@@ -2,8 +2,7 @@
 //  NSTStreetView.h
 //  NSTStreetview
 //
-//  Created by Adam Jenkins on 2018-04-04.
-//  Copyright © 2018 Nester. All rights reserved.
+//  Copyright © 2019 Nester. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -3,7 +3,7 @@
 //  react-native-streetview
 //
 //  Created by Amit Palomo on 26/04/2017.
-//  Copyright © 2017 Nester.co.il.
+//  Copyright © 2019 Nester.co.il.
 //
 
 #import <Foundation/Foundation.h>

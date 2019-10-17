@@ -1,7 +1,8 @@
 
 {
 	"name": "react-native-streetview",
-	"version": "0.2.0",
+	"version": "0.2.1",
+	"homepage": "https://github.com/nesterapp/react-native-streetview",
 	"description": "Google Panorama/StreetView component for React Native",
 	"author": "Amit Palomo <amit@nester.co.il>",
 	"license": "MIT",
