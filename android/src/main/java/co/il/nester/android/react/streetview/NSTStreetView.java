@@ -11,6 +11,8 @@ package co.il.nester.android.react.streetview;
 
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.events.EventDispatcher;
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
@@ -83,9 +85,12 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
         panorama.setOnStreetViewPanoramaChangeListener(new StreetViewPanorama.OnStreetViewPanoramaChangeListener() {
             @Override
             public void onStreetViewPanoramaChange(StreetViewPanoramaLocation streetViewPanoramaLocation) {
-                if (streetViewPanoramaLocation != null && streetViewPanoramaLocation.links != null ) {
+                if (streetViewPanoramaLocation != null) {
+                    WritableMap map = Arguments.createMap();
+                    map.putDouble("latitude", streetViewPanoramaLocation.position.latitude);
+                    map.putDouble("longitude", streetViewPanoramaLocation.position.longitude);
                     eventDispatcher.dispatchEvent(
-                            new NSTStreetViewEvent(getId(), NSTStreetViewEvent.ON_SUCCESS)
+                            new NSTStreetViewEvent(getId(), NSTStreetViewEvent.ON_SUCCESS, map)
                     );
                 } else {
                     eventDispatcher.dispatchEvent(
