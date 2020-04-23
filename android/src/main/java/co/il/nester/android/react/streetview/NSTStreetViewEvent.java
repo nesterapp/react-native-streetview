@@ -18,12 +18,18 @@ public class NSTStreetViewEvent extends Event<NSTStreetViewEvent> {
         mMap = null;
     }
 
+    public NSTStreetViewEvent(int viewId, int eventType, WritableMap params) {
+        super(viewId);
+        mEventType = eventType;
+        mMap = params;
+    }
+
     public static String eventNameForType(int eventType) {
         switch (eventType) {
             case ON_ERROR:
-                return "photoViewError";
+                return "onError";
             case ON_SUCCESS:
-                return "photoViewLoad";
+                return "onSuccess";
             default:
                 throw new IllegalStateException("Invalid image event: " + Integer.toString(eventType));
         }
