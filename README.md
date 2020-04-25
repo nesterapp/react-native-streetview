@@ -137,7 +137,7 @@ $ react-native run-android
 ## Roadmap and help?
 This component was built to have Street View ability in our Home Renting app, [Nester](http://nester.co.il).
 There is much to go forward, with camera and heading setup, markers, etc. We will gradually add those in the next releases.
-Feel free to fork and submit PR's. We'll really appriciate any effort, especially on Android ;(  
+Feel free to fork and submit PR's. We'll really appreciate any effort, especially on Android ;(  
 
 #### Contact
 Amit Palomo <amit@nester.co.il>  
