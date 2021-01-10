@@ -26,7 +26,9 @@ const propTypes = {
 	   zoom: PropTypes.number.isRequired,
 	}),
 	// Allowing user gestures (panning, zooming)
-	allGesturesEnabled: PropTypes.bool,
+  allGesturesEnabled: PropTypes.bool,
+
+  streetNamesHidden: PropTypes.bool,
 
 	heading: PropTypes.number,
 

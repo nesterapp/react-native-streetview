@@ -37,6 +37,7 @@ RCT_CUSTOM_VIEW_PROPERTY(heading, CLLocationDegrees, NSTStreetView) {
 }
 
 RCT_EXPORT_VIEW_PROPERTY(allGesturesEnabled, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(streetNamesHidden, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(onError, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onSuccess, RCTDirectEventBlock);
 

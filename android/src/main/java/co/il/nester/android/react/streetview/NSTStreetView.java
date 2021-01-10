@@ -28,6 +28,7 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
 
     private StreetViewPanorama panorama;
     private Boolean allGesturesEnabled = true;
+    private Boolean streetNamesHidden = false;
     private LatLng coordinate = null;
     // default value
     private int radius = 50;
@@ -67,6 +68,7 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
 
         this.panorama = panorama;
         this.panorama.setPanningGesturesEnabled(allGesturesEnabled);
+        this.panorama.setStreetNamesEnabled(!streetNamesHidden);
 
         final EventDispatcher eventDispatcher = ((ReactContext) getContext())
                 .getNativeModule(UIManagerModule.class).getEventDispatcher();
@@ -119,6 +121,10 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
     public void setAllGesturesEnabled(boolean allGesturesEnabled) {
         // Saving to local variable as panorama may not be ready yet (async)
         this.allGesturesEnabled = allGesturesEnabled;
+    }
+
+    public void setStreetNamesHidden(boolean streetNamesHidden) {
+        this.streetNamesHidden = streetNamesHidden;
     }
 
     public void setCoordinate(ReadableMap coordinate) {

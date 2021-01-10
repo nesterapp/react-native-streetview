@@ -38,6 +38,11 @@ public class NSTStreetViewManager extends SimpleViewManager<NSTStreetView> {
         view.setAllGesturesEnabled(allGesturesEnabled);
     }
 
+    @ReactProp(name = "streetNamesHidden", defaultBoolean = false)
+    public void setStreetNamesEnabled(NSTStreetView view, boolean streetNamesHidden) {
+        view.setStreetNamesHidden(streetNamesHidden);
+    }
+
     @ReactProp(name = "coordinate")
     public void setCoordinate(NSTStreetView view, ReadableMap coordinate) {
         view.setCoordinate(coordinate);

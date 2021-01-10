@@ -100,6 +100,7 @@ Prop                  | Type     | Default              | Description
 allGesturesEnabled    | bool     | true               | Enables user interaction (orientation, zoom, navigation)
 coordinate            | shape | null                     |  Request panorama near the coordinate
 radius                | number   | 50                     |  Specify a search radius, in meters, around the coordinate
+streetNamesHidden     | bool     | false                  |  Remove street names from the map
 
 ## Example
 
