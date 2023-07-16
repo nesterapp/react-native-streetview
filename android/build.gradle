@@ -5,16 +5,17 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
-    compileSdkVersion 28
+    namespace "co.il.nester.android.react.streetview"
+    compileSdkVersion 33
 
     defaultConfig {
-        minSdkVersion safeExtGet('minSdkVersion', 16)
-        targetSdkVersion safeExtGet('targetSdkVersion', 28)
+        minSdkVersion safeExtGet('minSdkVersion', 21)
+        targetSdkVersion safeExtGet('targetSdkVersion', 33)
     }
 }
 
 dependencies {
     implementation "com.facebook.react:react-native:+"
-    implementation "com.google.android.gms:play-services-base:${safeExtGet('playServicesVersion', '17.0.0')}"
-    implementation "com.google.android.gms:play-services-maps:${safeExtGet('playServicesVersion', '17.0.0')}"
+    implementation "com.google.android.gms:play-services-base:${safeExtGet('playServicesVersion', '18.2.0')}"
+    implementation "com.google.android.gms:play-services-maps:${safeExtGet('playServicesVersion', '18.0.2')}"
 }

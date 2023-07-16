@@ -1,20 +1,14 @@
 
-# react-native-streetview
+# react-native-streetview [![npm version](https://img.shields.io/npm/v/react-native-streetview.svg?style=flat)](https://www.npmjs.com/package/react-native-streetview)
 
-React Native Google's Panorama/StreetView component for iOS and Android.
-
-![](http://i.imgur.com/PTFla6o.png)&emsp;&emsp;![](http://i.imgur.com/O3uzwrC.png)
+Google's StreetView component for React Native  
+(iOS and Android supported)
 
 ## Installation
 
-```
+On your app's root folder run
+```sh
 yarn add react-native-streetview
-```
-
-Link the native dependencies:
-
-```
-react-native link react-native-streetview
 ```
 
 ### iOS
@@ -25,17 +19,19 @@ react-native link react-native-streetview
 2. Add your API key to AppDelegate:
     > Go to https://console.developers.google.com/apis/credentials to check your credentials.
 
-	```
+	```objc
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
 		[GMSServices provideAPIKey:@"YOUR-API-KEY-HERE"];
 	```
 
 ### Android
-1. Install Google Play services using SDK Manager in Android Studio
+1. Install Google Play services using SDK Manager in Android Studio (once for all your apps)
 
-2. Add your API key to Manifest file (`android\app\src\main\AndroidManifest.xml`):
-    > Go to https://console.developers.google.com/apis/credentials to check your credentials.
+2. Generate an a new API Key. see https://console.developers.google.com/apis/credentials
+   Make sure Google Maps API is enabled.
+
+3. Add the API key to your app's Manifest file (`android\app\src\main\AndroidManifest.xml`):
 
    ```xml
    <application>
@@ -45,8 +41,6 @@ react-native link react-native-streetview
        android:value="YOUR-API-KEY-HERE"/>
    </application>
    ```
-
->This installation should work in physical devices and iOS Simulator. For Genymotion, be sure to check Android installation about Google Play Services
 
 ## Usage
 
@@ -105,34 +99,39 @@ streetNamesHidden     | bool     | false                  |  Remove street names
 ## Example
 
 The 'example' folder contains a fully working example for iOS and Android.  
-To run the example on iOS do the following:  
 
-```
+### iOS:
+
+Edit `AppDelegate.m` and add your API key at:
+`[GMSServices provideAPIKey:@"YOUR-API-KEY-HERE"];`
+
+And run
+```sh
 $ cd example
 $ yarn
 $ cd ios
 $ pod install
+$ cd ..
+$ npx react-native run-ios
 ```
 
-Edit AppDelegate.m to add your API key:
-`[GMSServices provideAPIKey:@"YOUR-API-KEY-HERE"];`
+### Android:
 
-```
-$ react-native run-ios
+Edit AndroidManifest.xml (in example/android/app/src/main)  
+Add your API key under:
+
+```xml
+<meta-data
+    android:name="com.google.android.geo.API_KEY"
+    android:value="YOUR-API-KEY-HERE" />
 ```
 
-To run the example on Android do the following:
 
-```
+Then run
+```sh
 $ cd example
 $ yarn
-```
-
-Edit AndroidManifest.xml to add your API key:
-`android:value="YOUR-API-KEY-HERE"/>`
-
-```
-$ react-native run-android
+$ npx react-native run-android
 ```
 
 ## Roadmap and help?
@@ -147,7 +146,7 @@ Rafael Bodill <rafi@nester.co.il>
 License
 --------
 
-     Copyright (c) 2018 Nester.co.il
+     Copyright (c) 2023 Nester.co.il
 
      Licensed under the The MIT License (MIT) (the "License");
      you may not use this file except in compliance with the License.
