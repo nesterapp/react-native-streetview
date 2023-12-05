@@ -5,7 +5,7 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
-    namespace "co.il.nester.android.react.streetview"
+    namespace "com.example.android.react.streetview"
     compileSdkVersion 33
 
     defaultConfig {

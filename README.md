@@ -102,7 +102,7 @@ The 'example' folder contains a fully working example for iOS and Android.
 
 ### iOS:
 
-Edit `AppDelegate.m` and add your API key at:
+Edit `example/ios/example/AppDelegate.m` and add your API key at:
 `[GMSServices provideAPIKey:@"YOUR-API-KEY-HERE"];`
 
 And run
