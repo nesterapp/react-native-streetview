@@ -13,8 +13,7 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.uimanager.UIManagerModule;
-import com.facebook.react.uimanager.events.EventDispatcher;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.model.LatLng;
@@ -70,16 +69,15 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
         this.panorama.setPanningGesturesEnabled(allGesturesEnabled);
         this.panorama.setStreetNamesEnabled(!streetNamesHidden);
 
-        final EventDispatcher eventDispatcher = ((ReactContext) getContext())
-                .getNativeModule(UIManagerModule.class).getEventDispatcher();
+        Context context = getContext();
+        ReactContext reactContext = (ReactContext)context;
 
         this.panorama.setOnStreetViewPanoramaCameraChangeListener(new StreetViewPanorama.OnStreetViewPanoramaCameraChangeListener() {
             @Override
             public void onStreetViewPanoramaCameraChange(StreetViewPanoramaCamera streetViewPanoramaCamera) {
                 if (!(streetViewPanoramaCamera.bearing >= 0 ) && coordinate != null) {
-                    eventDispatcher.dispatchEvent(
-                            new NSTStreetViewEvent(getId(), NSTStreetViewEvent.ON_ERROR)
-                    );
+                    reactContext.getJSModule(RCTEventEmitter.class)
+                        .receiveEvent(getId(), "onError", null);
                 }
             }
         });
@@ -91,13 +89,11 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
                     WritableMap map = Arguments.createMap();
                     map.putDouble("latitude", streetViewPanoramaLocation.position.latitude);
                     map.putDouble("longitude", streetViewPanoramaLocation.position.longitude);
-                    eventDispatcher.dispatchEvent(
-                            new NSTStreetViewEvent(getId(), NSTStreetViewEvent.ON_SUCCESS, map)
-                    );
+                    reactContext.getJSModule(RCTEventEmitter.class)
+                        .receiveEvent(getId(), "onSuccess", map);
                 } else {
-                    eventDispatcher.dispatchEvent(
-                            new NSTStreetViewEvent(getId(), NSTStreetViewEvent.ON_ERROR)
-                    );
+                    reactContext.getJSModule(RCTEventEmitter.class)
+                        .receiveEvent(getId(), "onError", null);
                 }
             }
         });

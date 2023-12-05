@@ -55,9 +55,9 @@ public class NSTStreetViewManager extends SimpleViewManager<NSTStreetView> {
     @Override
     public @Nullable
     Map getExportedCustomDirectEventTypeConstants() {
-        return MapBuilder.of(
-                NSTStreetViewEvent.eventNameForType(NSTStreetViewEvent.ON_ERROR), MapBuilder.of("registrationName", NSTStreetViewEvent.eventNameForType(NSTStreetViewEvent.ON_ERROR)),
-                NSTStreetViewEvent.eventNameForType(NSTStreetViewEvent.ON_SUCCESS), MapBuilder.of("registrationName", NSTStreetViewEvent.eventNameForType(NSTStreetViewEvent.ON_SUCCESS))
-        );
+        return MapBuilder.builder()
+            .put("onSuccess", MapBuilder.of("registrationName", "onSuccess"))
+            .put("onError", MapBuilder.of("registrationName", "onError"))
+            .build();
     }
 }
