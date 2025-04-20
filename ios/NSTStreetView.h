@@ -13,4 +13,7 @@
 @property (nonatomic,copy) RCTDirectEventBlock onError;
 @property (nonatomic,copy) RCTDirectEventBlock onSuccess;
 
+// Animate camera updates
+- (void)animateToCameraPosition:(GMSPanoramaCamera *)camera;
+
 @end

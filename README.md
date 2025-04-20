@@ -1,4 +1,3 @@
-
 # react-native-streetview [![npm version](https://img.shields.io/npm/v/react-native-streetview.svg?style=flat)](https://www.npmjs.com/package/react-native-streetview)
 
 Google's StreetView component for React Native  
@@ -20,6 +19,8 @@ yarn add react-native-streetview
     > Go to https://console.developers.google.com/apis/credentials to check your credentials.
 
 	```objc
+  import GoogleMaps
+  
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
 		[GMSServices provideAPIKey:@"YOUR-API-KEY-HERE"];
@@ -89,14 +90,40 @@ A workaround solution is to bound StreetView with some margins.
 See [issue 12](https://github.com/nesterapp/react-native-streetview/issues/12)
 
 ## Properties
-Prop                  | Type     | Default              | Description
---------------------- | -------- | -------------------- | -----------
-allGesturesEnabled    | bool     | true               | Enables user interaction (orientation, zoom, navigation)
-coordinate            | shape | null                     |  Request panorama near the coordinate
-radius                | number   | 50                     |  Specify a search radius, in meters, around the coordinate
-streetNamesHidden     | bool     | false                  |  Remove street names from the map
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `coordinate` | Object | `null` | Specify the latitude and longitude of the streetview location |
+| `coordinate.latitude` | Number | `0` | Latitude |
+| `coordinate.longitude` | Number | `0` | Longitude |
+| `coordinate.radius` | Number | `50` | Search radius in meters |
+| `pov` | Object | `null` | Camera point of view |
+| `pov.tilt` | Number | `0` | Camera tilt angle in degrees (0-90) |
+| `pov.bearing` | Number | `0` | Camera compass direction (0-360). 0 = north, 90 = east |
+| `pov.zoom` | Number | `1` | Camera zoom level (0-3) |
+| `heading` | Number | `0` | **Deprecated:** Use `pov.bearing` instead. Camera direction in degrees |
+| `allGesturesEnabled` | Boolean | `true` | Whether to enable user gestures |
+| `streetNamesHidden` | Boolean | `false` | Whether to hide street names |
 
 ## Example
+
+```javascript
+import StreetView from 'react-native-streetview';
+
+<StreetView
+  style={{flex: 1}}
+  coordinate={{
+    latitude: 37.7749,
+    longitude: -122.4194,
+    radius: 50
+  }}
+  pov={{
+    tilt: 30,
+    bearing: 90,
+    zoom: 1
+  }}
+/>
+```
 
 The 'example' folder contains a fully working example for iOS and Android.  
 
@@ -136,26 +163,11 @@ $ npx react-native run-android
 
 ## Roadmap and help?
 This component was built to have Street View ability in our Home Renting app, [Nester](http://nester.co.il).
-There is much to go forward, with camera and heading setup, markers, etc. We will gradually add those in the next releases.
-Feel free to fork and submit PR's. We'll really appreciate any effort, especially on Android ;(  
 
 #### Contact
-Amit Palomo <amit@nester.co.il>  
-Rafael Bodill <rafi@nester.co.il>  
+Amit Palomo <apalgm@gmail.com>  
 
 License
 --------
 
-     Copyright (c) 2023 Nester.co.il
-
-     Licensed under the The MIT License (MIT) (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-        https://raw.githubusercontent.com/nesterapp/react-native-streetview/master/LICENSE
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
+MIT

@@ -28,4 +28,11 @@
         _onSuccess(@{@"coordinate":coord});
     }
 }
+
+- (void)animateToCameraPosition:(GMSPanoramaCamera *)camera {
+    // Animate camera transition over 1 second 
+    // (similar to Android's duration of 1000ms)
+    [self animateToCameraPosition:camera animationDuration:1.0];
+}
+
 @end
