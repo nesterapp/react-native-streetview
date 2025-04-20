@@ -63,6 +63,12 @@ RCT_CUSTOM_VIEW_PROPERTY(heading, CLLocationDegrees, NSTStreetView) {
                                                zoom:zoom];
 }
 
+// Add a custom property for outdoorOnly
+RCT_CUSTOM_VIEW_PROPERTY(outdoorOnly, BOOL, NSTStreetView) {
+  if (json == nil) return;
+  view.outdoorOnly = [RCTConvert BOOL:json];
+}
+
 RCT_EXPORT_VIEW_PROPERTY(allGesturesEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(streetNamesHidden, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(onError, RCTDirectEventBlock);

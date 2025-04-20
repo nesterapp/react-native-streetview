@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
 import com.google.android.gms.maps.model.StreetViewPanoramaLocation;
+import com.google.android.gms.maps.model.StreetViewSource;
 
 import android.content.Context;
 
@@ -35,6 +36,7 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
     private float bearing = 0 ;
     private Integer zoom = 1;
     private Boolean started = false;
+    private Boolean outdoorOnly = false;
 
     public NSTStreetView(Context context) {
         super(context);
@@ -99,7 +101,8 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
         });
 
         if (coordinate != null) {
-            this.panorama.setPosition(coordinate, radius);
+            StreetViewSource source = outdoorOnly ? StreetViewSource.OUTDOOR : StreetViewSource.DEFAULT;
+            this.panorama.setPosition(coordinate, radius, source);
         }
 
        long duration = 1000;
@@ -136,7 +139,8 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
         // Saving to local variable as panorama may not be ready yet (async)
         this.coordinate = new LatLng(lat, lng);
          if (this.coordinate != null && this.started  ) {
-            this.panorama.setPosition(this.coordinate, this.radius);
+            StreetViewSource source = outdoorOnly ? StreetViewSource.OUTDOOR : StreetViewSource.DEFAULT;
+            this.panorama.setPosition(this.coordinate, this.radius, source);
          }
     }
     public void setPov(ReadableMap pov) {
@@ -157,5 +161,14 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
              panorama.animateTo(camera,duration);
           }
 
+    }
+
+    public void setOutdoorOnly(boolean outdoorOnly) {
+        this.outdoorOnly = outdoorOnly;
+        // If panorama is already initialized, update the position with the new source
+        if (this.panorama != null && this.coordinate != null) {
+            StreetViewSource source = outdoorOnly ? StreetViewSource.OUTDOOR : StreetViewSource.DEFAULT;
+            this.panorama.setPosition(this.coordinate, this.radius, source);
+        }
     }
 }

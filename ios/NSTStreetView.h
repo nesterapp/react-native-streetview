@@ -12,6 +12,7 @@
 @interface NSTStreetView : GMSPanoramaView <GMSPanoramaViewDelegate>
 @property (nonatomic,copy) RCTDirectEventBlock onError;
 @property (nonatomic,copy) RCTDirectEventBlock onSuccess;
+@property (nonatomic) BOOL outdoorOnly;
 
 // Animate camera updates
 - (void)animateToCameraPosition:(GMSPanoramaCamera *)camera;

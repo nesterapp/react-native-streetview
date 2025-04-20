@@ -53,6 +53,11 @@ public class NSTStreetViewManager extends SimpleViewManager<NSTStreetView> {
         view.setPov(pov);
     }
 
+    @ReactProp(name = "outdoorOnly", defaultBoolean = false)
+    public void setOutdoorOnly(NSTStreetView view, boolean outdoorOnly) {
+        view.setOutdoorOnly(outdoorOnly);
+    }
+
     @Override
     public @Nullable
     Map getExportedCustomDirectEventTypeConstants() {

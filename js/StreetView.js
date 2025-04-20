@@ -26,14 +26,13 @@ const propTypes = {
 	   zoom: PropTypes.number.isRequired,
 	}),
 	// Allowing user gestures (panning, zooming)
-  allGesturesEnabled: PropTypes.bool,
-
-  streetNamesHidden: PropTypes.bool,
-
+  	allGesturesEnabled: PropTypes.bool,
+  	streetNamesHidden: PropTypes.bool,
 	heading: PropTypes.number,
-
 	onError: PropTypes.func,
-	onSuccess: PropTypes.func
+	onSuccess: PropTypes.func,
+  	// Limits Street View searches to outdoor collections only when true
+  	outdoorOnly: PropTypes.bool,
 };
 
 class StreetView extends React.Component {

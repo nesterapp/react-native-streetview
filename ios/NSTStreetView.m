@@ -34,6 +34,12 @@
     [self animateToCamera:camera animationDuration:1.0];
 }
 
+- (void)moveNearCoordinate:(CLLocationCoordinate2D)coordinate radius:(NSUInteger)radius {
+    // Use the appropriate source based on outdoorOnly flag
+    GMSPanoramaSource source = self.outdoorOnly ? kGMSPanoramaSourceOutside : kGMSPanoramaSourceDefault;
+    
+    // call the super implementation
+    [super moveNearCoordinate:coordinate radius:radius source:source];
 }
 
 @end

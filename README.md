@@ -115,6 +115,7 @@ See [issue 12](https://github.com/nesterapp/react-native-streetview/issues/12)
 | `streetNamesHidden` | Boolean | `false` | Whether to hide street names |
 | `onError` | Function | `null` | Callback when panorama cannot be found or errors occur |
 | `onSuccess` | Function | `null` | Callback when panorama is loaded successfully with the location coordinates |
+| `outdoorOnly` | Boolean | `false` | When true, limits Street View searches to outdoor panoramas only |
 
 ## Example Project
 
