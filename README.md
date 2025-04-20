@@ -18,12 +18,18 @@ yarn add react-native-streetview
 2. Add your API key to AppDelegate:
     > Go to https://console.developers.google.com/apis/credentials to check your credentials.
 
-	```objc
+	```swift
   import GoogleMaps
-  
-	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-	{
-		[GMSServices provideAPIKey:@"YOUR-API-KEY-HERE"];
+
+  func application(_ application: UIApplication,
+                  didFinishLaunchingWithOptions launchOptions:
+                  [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    .
+    .
+    GMSServices.provideAPIKey("YOUR-API-KEY")
+    .
+    .
+  }
 	```
 
 ### Android
@@ -50,26 +56,29 @@ yarn add react-native-streetview
 import StreetView from 'react-native-streetview';
 ```
 
-### Add StreetView component
+### Basic Implementation
 ```javascript
+import StreetView from 'react-native-streetview';
+
 <View style={styles.container}>
   <StreetView
     style={styles.streetView}
     allGesturesEnabled={true}
     coordinate={{
-      'latitude': -33.852,
-      'longitude': 151.211
+      latitude: 37.7749,
+      longitude: -122.4194,
+      radius: 50  // Search radius in meters
     }}
     pov={{
-	tilt:parseFloat(0),
-	bearing:parseFloat(0),
-	zoom:parseInt(1)
+      tilt: 30,
+      bearing: 90,
+      zoom: 1
     }}
   />
 </View>
 ```
 
-### Use position absolute for layout
+### Recommended Styling
 ```javascript
 const styles = StyleSheet.create({
   container: {
@@ -89,14 +98,14 @@ of StreetView's container screen - if it was deployed on full screen.
 A workaround solution is to bound StreetView with some margins.
 See [issue 12](https://github.com/nesterapp/react-native-streetview/issues/12)
 
-## Properties
+## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `coordinate` | Object | `null` | Specify the latitude and longitude of the streetview location |
 | `coordinate.latitude` | Number | `0` | Latitude |
 | `coordinate.longitude` | Number | `0` | Longitude |
-| `coordinate.radius` | Number | `50` | Search radius in meters |
+| `coordinate.radius` | Number | `50` | Search radius in meters around the specified location. If no panorama is found at the exact coordinates, Google Street View will search for the closest panorama within this radius. |
 | `pov` | Object | `null` | Camera point of view |
 | `pov.tilt` | Number | `0` | Camera tilt angle in degrees (0-90) |
 | `pov.bearing` | Number | `0` | Camera compass direction (0-360). 0 = north, 90 = east |
@@ -104,26 +113,10 @@ See [issue 12](https://github.com/nesterapp/react-native-streetview/issues/12)
 | `heading` | Number | `0` | **Deprecated:** Use `pov.bearing` instead. Camera direction in degrees |
 | `allGesturesEnabled` | Boolean | `true` | Whether to enable user gestures |
 | `streetNamesHidden` | Boolean | `false` | Whether to hide street names |
+| `onError` | Function | `null` | Callback when panorama cannot be found or errors occur |
+| `onSuccess` | Function | `null` | Callback when panorama is loaded successfully with the location coordinates |
 
-## Example
-
-```javascript
-import StreetView from 'react-native-streetview';
-
-<StreetView
-  style={{flex: 1}}
-  coordinate={{
-    latitude: 37.7749,
-    longitude: -122.4194,
-    radius: 50
-  }}
-  pov={{
-    tilt: 30,
-    bearing: 90,
-    zoom: 1
-  }}
-/>
-```
+## Example Project
 
 The 'example' folder contains a fully working example for iOS and Android.  
 

@@ -30,9 +30,10 @@
 }
 
 - (void)animateToCameraPosition:(GMSPanoramaCamera *)camera {
-    // Animate camera transition over 1 second 
-    // (similar to Android's duration of 1000ms)
-    [self animateToCameraPosition:camera animationDuration:1.0];
+    // Fix: Use the correct method name from GMSPanoramaView
+    [self animateToCamera:camera animationDuration:1.0];
+}
+
 }
 
 @end

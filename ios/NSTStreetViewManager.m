@@ -49,17 +49,17 @@ RCT_CUSTOM_VIEW_PROPERTY(pov, NSDictionary, NSTStreetView) {
   [view animateToCameraPosition:camera];
 }
 
-// Update heading property to be backward compatible but mark as deprecated
+// Update heading property to be backward compatible
 RCT_CUSTOM_VIEW_PROPERTY(heading, CLLocationDegrees, NSTStreetView) {
   if (json == nil) return;
   
-  // Preserve existing camera tilt and zoom if possible
-  float tilt = view.camera ? view.camera.pitch : 0;
+  // Preserve existing camera pitch and zoom if possible
+  float pitch = view.camera ? view.camera.orientation.pitch : 0;  // Use orientation.pitch
   float zoom = view.camera ? view.camera.zoom : 1;
   
   // Create and set camera
-  view.camera = [GMSPanoramaCamera cameraWithHeading:[RCTConvert CLLocationDegrees:json] 
-                                              pitch:tilt 
+  view.camera = [GMSPanoramaCamera cameraWithHeading:[RCTConvert CLLocationDegrees:json]
+                                              pitch:pitch
                                                zoom:zoom];
 }
 

@@ -47,10 +47,11 @@ public class NSTStreetViewManager extends SimpleViewManager<NSTStreetView> {
     public void setCoordinate(NSTStreetView view, ReadableMap coordinate) {
         view.setCoordinate(coordinate);
     }
+
     @ReactProp(name = "pov")
-        public void setPov(NSTStreetView view, ReadableMap pov) {
-            view.setPov(pov);
-        }
+    public void setPov(NSTStreetView view, ReadableMap pov) {
+        view.setPov(pov);
+    }
 
     @Override
     public @Nullable
