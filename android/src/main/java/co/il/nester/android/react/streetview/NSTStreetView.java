@@ -32,9 +32,9 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
     private LatLng coordinate = null;
     // default value
     private int radius = 50;
-    private float tilt = 0 ;
-    private float bearing = 0 ;
-    private Integer zoom = 1;
+    private float tilt = 0;
+    private float bearing = 0;
+    private Integer zoom = 0;
     private Boolean started = false;
     private Boolean outdoorOnly = false;
 

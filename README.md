@@ -109,7 +109,7 @@ See [issue 12](https://github.com/nesterapp/react-native-streetview/issues/12)
 | `pov` | Object | `null` | Camera point of view |
 | `pov.tilt` | Number | `0` | Camera tilt angle in degrees (0-90) |
 | `pov.bearing` | Number | `0` | Camera compass direction (0-360). 0 = north, 90 = east |
-| `pov.zoom` | Number | `1` | Camera zoom level (0-3) |
+| `pov.zoom` | Number | `0` | Camera zoom level (0-5) |
 | `heading` | Number | `0` | **Deprecated:** Use `pov.bearing` instead. Camera direction in degrees |
 | `allGesturesEnabled` | Boolean | `true` | Whether to enable user gestures |
 | `streetNamesHidden` | Boolean | `false` | Whether to hide street names |

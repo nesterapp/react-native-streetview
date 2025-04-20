@@ -38,7 +38,7 @@ RCT_CUSTOM_VIEW_PROPERTY(pov, NSDictionary, NSTStreetView) {
   // Extract values from pov object with defaults if values aren't provided
   float tilt = json[@"tilt"] ? [RCTConvert float:json[@"tilt"]] : 0;
   float bearing = json[@"bearing"] ? [RCTConvert float:json[@"bearing"]] : 0;
-  float zoom = json[@"zoom"] ? [RCTConvert float:json[@"zoom"]] : 1;
+  float zoom = json[@"zoom"] ? [RCTConvert float:json[@"zoom"]] : 0;
   
   // Create camera
   GMSPanoramaCamera *camera = [GMSPanoramaCamera cameraWithHeading:bearing
@@ -55,7 +55,7 @@ RCT_CUSTOM_VIEW_PROPERTY(heading, CLLocationDegrees, NSTStreetView) {
   
   // Preserve existing camera pitch and zoom if possible
   float pitch = view.camera ? view.camera.orientation.pitch : 0;  // Use orientation.pitch
-  float zoom = view.camera ? view.camera.zoom : 1;
+  float zoom = view.camera ? view.camera.zoom : 0;
   
   // Create and set camera
   view.camera = [GMSPanoramaCamera cameraWithHeading:[RCTConvert CLLocationDegrees:json]
