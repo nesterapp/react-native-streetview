@@ -103,7 +103,8 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
         }
 
        long duration = 1000;
-       if (bearing > 0) {
+       // Changed from "bearing > 0" to "bearing >= 0" to allow bearing = 0
+       if (bearing >= 0 && this.started) {
              StreetViewPanoramaCamera camera = new StreetViewPanoramaCamera.Builder()
            .zoom(zoom)
            .tilt(tilt)
@@ -146,7 +147,8 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
         zoom = pov.getInt("zoom");
 
         long duration = 1000;
-         if (bearing > 0 && this.started) {
+        // Changed from "bearing > 0" to "bearing >= 0" to allow bearing = 0
+         if (bearing >= 0 && this.started) {
              StreetViewPanoramaCamera camera = new StreetViewPanoramaCamera.Builder()
              .zoom(zoom)
              .tilt(tilt)
