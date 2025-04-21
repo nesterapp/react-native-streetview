@@ -1,11 +1,8 @@
-//
-//  NSTStreetView.java
-//  react-native-streetview
-//
-//  Created by Amit Palomo on 26/04/2017.
-//  Copyright © 2017 Nester.co.il.
-//
-
+/**
+ * NSTStreetView.java
+ * 
+ * Street View component for React Native (Android implementation)
+ */
 
 package co.il.nester.android.react.streetview;
 

@@ -4,7 +4,7 @@
 	"version": "0.2.4",
 	"homepage": "https://github.com/nesterapp/react-native-streetview",
 	"description": "Google Panorama/StreetView component for React Native",
-	"author": "Amit Palomo <amit@nester.co.il>",
+	"author": "Amit Palomo <apalgm@gmail.com>",
 	"license": "MIT",
 	"main": "index.js",
 	"repository": {

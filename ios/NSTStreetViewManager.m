@@ -1,10 +1,8 @@
-//
-//  NSTStreetViewManager.m
-//  react-native-streetview
-//
-//  Created by Amit Palomo on 26/04/2017.
-//  Copyright © 2019 Nester.co.il.
-//
+/**
+ * NSTStreetViewManager.m
+ * 
+ * Street View component manager for React Native (iOS implementation)
+ */
 
 #import <Foundation/Foundation.h>
 #import <React/RCTViewManager.h>

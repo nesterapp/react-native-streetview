@@ -1,9 +1,8 @@
-//
-//  NSTStreetView.h
-//  NSTStreetview
-//
-//  Copyright © 2019 Nester. All rights reserved.
-//
+/**
+ * NSTStreetView.h
+ * 
+ * Street View component for React Native (iOS implementation)
+ */
 
 #import <Foundation/Foundation.h>
 #import <React/RCTViewManager.h>

@@ -10,11 +10,11 @@ Pod::Spec.new do |s|
 
   s.authors      = package['author']
   s.homepage     = package['homepage']
-  s.platform     = :ios, "9.0"
+  s.platform     = :ios, "12.0"
 
   s.source       = { :git => "https://github.com/nesterapp/react-native-streetview.git", :tag => "v#{s.version}" }
   s.source_files  = "ios/**/*.{h,m}"
 
-  s.dependency 'React'
-  s.dependency 'GoogleMaps'
+  s.dependency 'React-Core'
+  s.dependency 'GoogleMaps', '~> 7.0'
 end

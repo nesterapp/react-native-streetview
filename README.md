@@ -3,100 +3,147 @@
 Google's StreetView component for React Native  
 (iOS and Android supported)
 
+## Features
+
+- 🌐 Cross-platform Google Street View integration (iOS & Android)
+- 🎥 Customizable camera position and point of view (tilt, bearing, zoom)
+- 👆 Gesture controls for user interaction
+- 🔍 Configurable search radius to find nearby panoramas
+- 🏞️ Outdoor-only panorama option
+- 📊 Event callbacks for loading success and errors
+- ✅ Compatible with React Native 0.79+ and Fabric architecture
+
 ## Installation
 
-On your app's root folder run
 ```sh
 yarn add react-native-streetview
+# or using npm
+npm install --save react-native-streetview
 ```
+
+### API Key Setup
+1. Generate an API Key at https://console.developers.google.com/apis/credentials
+2. Make sure Google Maps API is enabled in the Google Cloud Console
 
 ### iOS
 
 1. Install GoogleMaps SDK for iOS using CocoaPods:
-		https://developers.google.com/maps/documentation/ios-sdk/start
+   - Add to your Podfile: `pod 'GoogleMaps'`
+   - Run `pod install`
+   - For detailed instructions, see: https://developers.google.com/maps/documentation/ios-sdk/config
 
 2. Add your API key to AppDelegate:
-    > Go to https://console.developers.google.com/apis/credentials to check your credentials.
 
-	```swift
-  import GoogleMaps
+```swift
+import GoogleMaps
 
-  func application(_ application: UIApplication,
-                  didFinishLaunchingWithOptions launchOptions:
-                  [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    .
-    .
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     GMSServices.provideAPIKey("YOUR-API-KEY")
-    .
-    .
-  }
-	```
+    // ...existing code...
+    return true
+}
+```
 
 ### Android
-1. Install Google Play services using SDK Manager in Android Studio (once for all your apps)
 
-2. Generate an a new API Key. see https://console.developers.google.com/apis/credentials
-   Make sure Google Maps API is enabled.
+1. Install Google Play services:
+   - Open Android Studio's SDK Manager
+   - Select and install "Google Play Services" from the SDK Tools tab
+   - For detailed instructions, see: https://developers.google.com/maps/documentation/android-sdk/start
 
-3. Add the API key to your app's Manifest file (`android\app\src\main\AndroidManifest.xml`):
+2. Add the API key to your app's Manifest file (`android\app\src\main\AndroidManifest.xml`):
 
    ```xml
    <application>
      <!-- You will only need to add this meta-data tag, but make sure it's a child of application -->
      <meta-data
        android:name="com.google.android.geo.API_KEY"
-       android:value="YOUR-API-KEY-HERE"/>
+       android:value="YOUR-API-KEY"/>
    </application>
    ```
 
 ## Usage
 
-### Import
-```javascript
-import StreetView from 'react-native-streetview';
-```
-
 ### Basic Implementation
+
 ```javascript
 import StreetView from 'react-native-streetview';
+import { View, StyleSheet } from 'react-native';
 
-<View style={styles.container}>
-  <StreetView
-    style={styles.streetView}
-    allGesturesEnabled={true}
-    coordinate={{
-      latitude: 37.7749,
-      longitude: -122.4194,
-      radius: 50  // Search radius in meters
-    }}
-    pov={{
-      tilt: 30,
-      bearing: 90,
-      zoom: 1
-    }}
-  />
-</View>
+const YourComponent = () => (
+  <View style={styles.container}>
+    <StreetView
+      style={styles.streetView}
+      allGesturesEnabled={true}
+      coordinate={{
+        latitude: 37.7749,
+        longitude: -122.4194,
+        radius: 50  // Search radius in meters
+      }}
+    />
+  </View>
+);
 ```
 
-### Recommended Styling
+### More Examples
+
+<details>
+<summary><b>With Camera Position (POV)</b></summary>
+
 ```javascript
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  streetView: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-});
+<StreetView
+  style={styles.streetView}
+  coordinate={{
+    latitude: 37.7749,
+    longitude: -122.4194,
+    radius: 50
+  }}
+  pov={{
+    tilt: 30,     // Camera tilt angle in degrees (range: 0-90)
+    bearing: 90,  // Camera compass direction (range: 0-360, where 0=North, 90=East)
+    zoom: 1       // Camera zoom level (range: 0-5)
+  }}
+/>
 ```
-> Notice: if you are using [react-navigation](https://github.com/react-navigation/react-navigation). There is a known bug where a black window appears upon dismissal
-of StreetView's container screen - if it was deployed on full screen.
-A workaround solution is to bound StreetView with some margins.
-See [issue 12](https://github.com/nesterapp/react-native-streetview/issues/12)
+</details>
+
+<details>
+<summary><b>Handling Events</b></summary>
+
+```javascript
+<StreetView
+  style={styles.streetView}
+  coordinate={{
+    latitude: 37.7749,
+    longitude: -122.4194,
+    radius: 50
+  }}
+  onSuccess={(event) => {
+    console.log('Panorama loaded successfully');
+    console.log('Coordinates:', event.nativeEvent);
+  }}
+  onError={(error) => {
+    console.error('Failed to load panorama:', error);
+  }}
+/>
+```
+</details>
+
+<details>
+<summary><b>Outdoor Only Panoramas</b></summary>
+
+```javascript
+<StreetView
+  style={styles.streetView}
+  coordinate={{
+    latitude: 37.7749,
+    longitude: -122.4194,
+    radius: 100
+  }}
+  outdoorOnly={true}
+/>
+```
+</details>
 
 ## Props
 
@@ -117,49 +164,32 @@ See [issue 12](https://github.com/nesterapp/react-native-streetview/issues/12)
 | `onSuccess` | Function | `null` | Callback when panorama is loaded successfully with the location coordinates |
 | `outdoorOnly` | Boolean | `false` | When true, limits Street View searches to outdoor panoramas only |
 
-## Example Project
+## Troubleshooting
 
-The 'example' folder contains a fully working example for iOS and Android.  
+### No panoramas found
+- Ensure coordinates are in an area covered by Google Street View
+- Try increasing the search radius
+- Check if your API key has StreetView API enabled
 
-### iOS:
+### Black screen issues
+- Verify your API key is correctly added to both platforms
+- For React Navigation users, add margins to the StreetView component as mentioned in the usage notes
+- Ensure the component has a proper size
 
-Edit `example/ios/example/AppDelegate.m` and add your API key at:
-`[GMSServices provideAPIKey:@"YOUR-API-KEY-HERE"];`
+## Contributing
 
-And run
-```sh
-$ cd example
-$ yarn
-$ cd ios
-$ pod install
-$ cd ..
-$ npx react-native run-ios
-```
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-### Android:
+## About
 
-Edit AndroidManifest.xml (in example/android/app/src/main)  
-Add your API key under:
+This component was originally developed for [Nester](http://nester.co.il), a home rental application requiring Google Street View integration.
 
-```xml
-<meta-data
-    android:name="com.google.android.geo.API_KEY"
-    android:value="YOUR-API-KEY-HERE" />
-```
+## Contact & Support
 
+For questions, issues, or feature requests, please contact:
 
-Then run
-```sh
-$ cd example
-$ yarn
-$ npx react-native run-android
-```
-
-## Roadmap and help?
-This component was built to have Street View ability in our Home Renting app, [Nester](http://nester.co.il).
-
-#### Contact
-Amit Palomo <apalgm@gmail.com>  
+- Amit Palomo - [apalgm@gmail.com](mailto:apalgm@gmail.com)
+- [Open an issue](https://github.com/nesterapp/react-native-streetview/issues)
 
 License
 --------

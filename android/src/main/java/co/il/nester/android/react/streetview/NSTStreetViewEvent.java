@@ -1,3 +1,9 @@
+/**
+ * NSTStreetViewEvent.java
+ * 
+ * Event handling for Street View component
+ */
+
 package co.il.nester.android.react.streetview;
 
 import com.facebook.react.bridge.WritableMap;
