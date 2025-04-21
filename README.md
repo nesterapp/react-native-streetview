@@ -13,6 +13,14 @@ Google's StreetView component for React Native
 - 📊 Event callbacks for loading success and errors
 - ✅ Compatible with React Native 0.79+ and Fabric architecture
 
+## Preview
+
+<table>
+  <tr>
+    <td><img width="260" src="assets/streetview-demo.gif" alt="StreetView Demo"></td>
+  </tr>
+</table>
+
 ## Installation
 
 ```sh
