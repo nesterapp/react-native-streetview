@@ -9,48 +9,54 @@ import PropTypes from 'prop-types';
 import { View, requireNativeComponent } from 'react-native';
 
 const propTypes = {
-	...View.propTypes,
+  ...View.propTypes,
 
-	// Center point
-	coordinate: PropTypes.shape({
-	   latitude: PropTypes.number.isRequired,
-	   longitude: PropTypes.number.isRequired,
-	   // Search radius (meters) around coordinate.
-	   radius: PropTypes.number,
-	}),
-	pov: PropTypes.shape({
-	   tilt: PropTypes.number.isRequired,
-	   bearing: PropTypes.number.isRequired,
-	   zoom: PropTypes.number.isRequired,
-	}),
-	// Allowing user gestures (panning, zooming)
-  	allGesturesEnabled: PropTypes.bool,
-  	streetNamesHidden: PropTypes.bool,
-	heading: PropTypes.number,
-	onError: PropTypes.func,
-	onSuccess: PropTypes.func,
-  	// Limits Street View searches to outdoor collections only when true
-  	outdoorOnly: PropTypes.bool,
+  // Center point
+  coordinate: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    // Search radius (meters) around coordinate.
+    radius: PropTypes.number,
+  }),
+  pov: PropTypes.shape({
+    tilt: PropTypes.number.isRequired,
+    bearing: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }),
+  // Allowing user gestures (panning, zooming)
+  allGesturesEnabled: PropTypes.bool,
+  streetNamesHidden: PropTypes.bool,
+  heading: PropTypes.number,
+  // Limits Street View searches to outdoor collections only when true
+  outdoorOnly: PropTypes.bool,
+  onError: PropTypes.func,
+  onSuccess: PropTypes.func,
+  // Called when panorama changes
+  onPanoramaChange: PropTypes.func,
+  // Called when POV (camera orientation) changes
+  onPovChange: PropTypes.func,
 };
 
 class StreetView extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
+  constructor(props) {
+    super(props);
+  }
 
-	render() {
-		return <NSTStreetView {...this.props} />;
-	}
+  render() {
+    return <NSTStreetView {...this.props} />;
+  }
 }
 
 StreetView.propTypes = propTypes;
 
 const cfg = {
-    nativeOnly: {
-        onError: true,
-        onSuccess: true,
-    }
+  nativeOnly: {
+    onError: true,
+    onSuccess: true,
+    onPanoramaChange: true,
+    onPovChange: true,
+  }
 };
 
 module.exports = requireNativeComponent('NSTStreetView', StreetView, cfg);

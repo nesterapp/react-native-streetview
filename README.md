@@ -10,7 +10,7 @@ Google's StreetView component for React Native
 - 👆 Gesture controls for user interaction
 - 🔍 Configurable search radius to find nearby panoramas
 - 🏞️ Outdoor-only panorama option
-- 📊 Event callbacks for loading success and errors
+- 📊 Event callbacks for loading status, location changes, and camera movements (POV)
 - ✅ Compatible with React Native 0.79+ and Fabric architecture
 
 ## Preview
@@ -133,6 +133,12 @@ const YourComponent = () => (
   onError={(error) => {
     console.error('Failed to load panorama:', error);
   }}
+  onPanoramaChange={(event) => {
+    console.log('Panorama changed:', event.nativeEvent);
+  }}
+  onPovChange={(event) => {
+    console.log('POV changed:', event.nativeEvent);
+  }}
 />
 ```
 </details>
@@ -170,6 +176,8 @@ const YourComponent = () => (
 | `streetNamesHidden` | Boolean | `false` | Whether to hide street names |
 | `onError` | Function | `null` | Callback when panorama cannot be found or errors occur |
 | `onSuccess` | Function | `null` | Callback when panorama is loaded successfully with the location coordinates |
+| `onPanoramaChange` | Function | `null` | Callback when the panorama view changes to a new location |
+| `onPovChange` | Function | `null` | Callback when the Point of View (camera orientation) changes |
 | `outdoorOnly` | Boolean | `false` | When true, limits Street View searches to outdoor panoramas only |
 
 ## Troubleshooting

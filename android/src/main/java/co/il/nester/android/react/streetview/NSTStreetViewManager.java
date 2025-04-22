@@ -56,12 +56,34 @@ public class NSTStreetViewManager extends SimpleViewManager<NSTStreetView> {
         view.setOutdoorOnly(outdoorOnly);
     }
 
+    @ReactProp(name = "onPanoramaChange")
+    public void setOnPanoramaChangeListener(NSTStreetView view, boolean hasListener) {
+        view.setHasPanoramaChangeListener(hasListener);
+    }
+
+    @ReactProp(name = "onPovChange")
+    public void setOnPovChangeListener(NSTStreetView view, boolean hasListener) {
+        view.setHasPovChangeListener(hasListener);
+    }
+
+    @ReactProp(name = "onError")
+    public void setOnErrorListener(NSTStreetView view, boolean hasListener) {
+        view.setHasErrorListener(hasListener);
+    }
+
+    @ReactProp(name = "onSuccess")
+    public void setOnSuccessListener(NSTStreetView view, boolean hasListener) {
+        view.setHasSuccessListener(hasListener);
+    }
+
     @Override
     public @Nullable
     Map getExportedCustomDirectEventTypeConstants() {
         return MapBuilder.builder()
             .put("onSuccess", MapBuilder.of("registrationName", "onSuccess"))
             .put("onError", MapBuilder.of("registrationName", "onError"))
+            .put("onPanoramaChange", MapBuilder.of("registrationName", "onPanoramaChange"))
+            .put("onPovChange", MapBuilder.of("registrationName", "onPovChange"))
             .build();
     }
 }

@@ -29,7 +29,6 @@ RCT_CUSTOM_VIEW_PROPERTY(coordinate, CLLocationCoordinate, NSTStreetView) {
                     radius: radius];
 }
 
-// Update pov handler to use animation
 RCT_CUSTOM_VIEW_PROPERTY(pov, NSDictionary, NSTStreetView) {
   if (json == nil) return;
   
@@ -47,7 +46,7 @@ RCT_CUSTOM_VIEW_PROPERTY(pov, NSDictionary, NSTStreetView) {
   [view animateToCameraPosition:camera];
 }
 
-// Update heading property to be backward compatible
+// heading property for backward compatibility (will be deprecated)
 RCT_CUSTOM_VIEW_PROPERTY(heading, CLLocationDegrees, NSTStreetView) {
   if (json == nil) return;
   
@@ -61,7 +60,6 @@ RCT_CUSTOM_VIEW_PROPERTY(heading, CLLocationDegrees, NSTStreetView) {
                                                zoom:zoom];
 }
 
-// Add a custom property for outdoorOnly
 RCT_CUSTOM_VIEW_PROPERTY(outdoorOnly, BOOL, NSTStreetView) {
   if (json == nil) return;
   view.outdoorOnly = [RCTConvert BOOL:json];
@@ -71,6 +69,8 @@ RCT_EXPORT_VIEW_PROPERTY(allGesturesEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(streetNamesHidden, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(onError, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onSuccess, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onPanoramaChange, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onPovChange, RCTDirectEventBlock);
 
 - (UIView *)view {
   NSTStreetView *panoView = [[NSTStreetView alloc] initWithFrame:CGRectZero];
