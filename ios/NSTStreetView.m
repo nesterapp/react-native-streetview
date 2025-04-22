@@ -33,7 +33,16 @@ static const float ZOOM_THRESHOLD = 0.1;    // zoom level
         NSNumber *lat = [[NSNumber alloc] initWithDouble:coordinate.latitude];
         NSNumber *lng = [[NSNumber alloc] initWithDouble:coordinate.longitude];
         NSDictionary *coord = @{@"latitude":lat,@"longitude":lng};
-        _onError(@{@"coordinate":coord});
+        NSMutableDictionary *errorData = [NSMutableDictionary dictionaryWithDictionary:@{@"coordinate":coord}];
+        
+        // Add error details if available
+        if (error) {
+            [errorData setObject:@(error.code) forKey:@"code"];
+            [errorData setObject:error.localizedDescription forKey:@"message"];
+            [errorData setObject:error.domain forKey:@"domain"];
+        }
+        
+        _onError(errorData);
     }
 }
 

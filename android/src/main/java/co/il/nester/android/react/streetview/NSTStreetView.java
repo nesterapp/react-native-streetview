@@ -161,9 +161,35 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
                             .receiveEvent(getId(), "onSuccess", successData);
                     }
                 } else if (hasErrorListener) {
-                    // Only send error if someone is listening
+                    // Create minimal error payload with useful diagnostics
+                    WritableMap errorData = Arguments.createMap();
+                    String errorMessage = "No panorama found at the specified location";
+                    
+                    // Add helpful suggestions based on current settings
+                    if (outdoorOnly) {
+                        errorMessage += ". You have 'outdoorOnly' enabled";
+                        
+                        if (radius < 100) {
+                            errorMessage += " and a small search radius (" + radius + "m)";
+                        }
+                        
+                        errorMessage += ". Try disabling 'outdoorOnly' or increasing the radius.";
+                    } else if (radius < 50) {
+                        errorMessage += ". Try increasing the search radius (currently " + radius + "m).";
+                    }
+                    
+                    errorData.putString("message", errorMessage);
+                    
+                    if (coordinate != null) {
+                        // Include coordinates in a flattened structure to keep payload minimal
+                        errorData.putDouble("latitude", coordinate.latitude);
+                        errorData.putDouble("longitude", coordinate.longitude);
+                        errorData.putInt("radius", radius);
+                        errorData.putBoolean("outdoorOnly", outdoorOnly);
+                    }
+                    
                     reactContext.getJSModule(RCTEventEmitter.class)
-                        .receiveEvent(getId(), "onError", null);
+                        .receiveEvent(getId(), "onError", errorData);
                 }
             }
         });
