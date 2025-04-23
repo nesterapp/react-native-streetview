@@ -130,14 +130,43 @@ const YourComponent = () => (
     console.log('Panorama loaded successfully');
     console.log('Coordinates:', event.nativeEvent);
   }}
-  onError={(error) => {
-    console.error('Failed to load panorama:', error);
+  onError={(errorEvent) => {
+    // Access detailed error information
+    const errorData = errorEvent.nativeEvent;
+    console.log('Street View error:', errorData.message);
+    // Access additional context for debugging
+    if (errorData.outdoorOnly) {
+      console.log('Try disabling outdoorOnly or increasing radius');
+    }
+    // For advanced debugging:
+    console.log('Error details:', {
+      location: `${errorData.latitude}, ${errorData.longitude}`,
+      radius: errorData.radius,
+      outdoorOnly: errorData.outdoorOnly
+    });
   }}
   onPanoramaChange={(event) => {
-    console.log('Panorama changed:', event.nativeEvent);
+    // When user navigates to a new panorama location
+    const panoramaData = event.nativeEvent;
+    console.log('Panorama changed to new location:', {
+      latitude: panoramaData.latitude,
+      longitude: panoramaData.longitude
+    });
+    // On iOS, may include additional Street View metadata
+    if (panoramaData.panoId) {
+      console.log('Panorama ID:', panoramaData.panoId);
+    }
   }}
   onPovChange={(event) => {
-    console.log('POV changed:', event.nativeEvent);
+    // When camera orientation changes
+    const povData = event.nativeEvent;
+    console.log('Camera view changed:');
+    console.log('Bearing (direction):', povData.bearing);
+    console.log('Tilt (angle):', povData.tilt);
+    console.log('Zoom level:', povData.zoom);
+    
+    // * Only triggered when changes exceed threshold values
+    // to avoid excessive updates during smooth camera movements
   }}
 />
 ```

@@ -13,7 +13,8 @@
 @property (nonatomic,copy) RCTDirectEventBlock onSuccess;
 @property (nonatomic,copy) RCTDirectEventBlock onPanoramaChange;
 @property (nonatomic,copy) RCTDirectEventBlock onPovChange;
-@property (nonatomic) BOOL outdoorOnly;
+@property (nonatomic, assign) BOOL outdoorOnly;
+@property (nonatomic, assign) NSInteger lastRadius;
 
 // Animate camera updates
 - (void)animateToCameraPosition:(GMSPanoramaCamera *)camera;

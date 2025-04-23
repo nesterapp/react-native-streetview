@@ -17,16 +17,21 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_CUSTOM_VIEW_PROPERTY(coordinate, CLLocationCoordinate, NSTStreetView) {
-  if (json == nil) return;
-
-  NSInteger radius = [[json valueForKey:@"radius"] intValue];
-  if(radius == 0){
-    radius = 50;
+RCT_CUSTOM_VIEW_PROPERTY(coordinate, CLLocationCoordinate2D, NSTStreetView) {
+  if (json) {
+    // Extract values
+    CLLocationDegrees lat = [RCTConvert double:json[@"latitude"]];
+    CLLocationDegrees lng = [RCTConvert double:json[@"longitude"]];
+    
+    // Get radius if specified, or use default
+    NSInteger radius = json[@"radius"] ? [RCTConvert NSInteger:json[@"radius"]] : 50;
+    
+    // Save the radius first to make sure it's available for error handling
+    view.lastRadius = radius;
+    
+    // Move to the location
+    [view moveNearCoordinate:CLLocationCoordinate2DMake(lat, lng) radius:radius];
   }
-
-  [view moveNearCoordinate:[RCTConvert CLLocationCoordinate2D:json]
-                    radius: radius];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(pov, NSDictionary, NSTStreetView) {

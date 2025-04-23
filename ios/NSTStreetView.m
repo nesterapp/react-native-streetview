@@ -23,6 +23,12 @@ static const float ZOOM_THRESHOLD = 0.1;    // zoom level
         lastTilt = 0;
         lastBearing = 0;
         lastZoom = 0;
+
+        // Initialize radius and outdoorOnly defaults
+        _lastRadius = 50;  // Default radius
+        _outdoorOnly = NO; // Default outdoor setting
+
+        self.delegate = self; // Set delegate to self to receive callbacks
     }
     return self;
 }
@@ -33,15 +39,38 @@ static const float ZOOM_THRESHOLD = 0.1;    // zoom level
         NSNumber *lat = [[NSNumber alloc] initWithDouble:coordinate.latitude];
         NSNumber *lng = [[NSNumber alloc] initWithDouble:coordinate.longitude];
         NSDictionary *coord = @{@"latitude":lat,@"longitude":lng};
-        NSMutableDictionary *errorData = [NSMutableDictionary dictionaryWithDictionary:@{@"coordinate":coord}];
-        
+
+        // Create a structured error payload similar to Android
+        NSMutableDictionary *errorData = [NSMutableDictionary dictionaryWithDictionary:@{
+            @"coordinate": coord
+        }];
+
+        // Add error message and details
+        NSString *message = @"No panorama found at the specified location";
+
         // Add error details if available
         if (error) {
+            message = [NSString stringWithFormat:@"%@: %@", message, error.localizedDescription];
             [errorData setObject:@(error.code) forKey:@"code"];
-            [errorData setObject:error.localizedDescription forKey:@"message"];
-            [errorData setObject:error.domain forKey:@"domain"];
         }
         
+        // Use the stored property instead of trying to access it from panorama
+        if (self.outdoorOnly) {
+            message = [NSString stringWithFormat:@"%@. You have 'outdoorOnly' enabled", message];
+
+            if (self.lastRadius < 100) {
+                message = [NSString stringWithFormat:@"%@ and a small search radius (%ldm)", message, (long)self.lastRadius];
+            }
+
+            message = [NSString stringWithFormat:@"%@. Try disabling 'outdoorOnly' or increasing the radius.", message];
+        } else if (self.lastRadius < 50) {
+            message = [NSString stringWithFormat:@"%@. Try increasing the search radius (currently %ldm).", message, (long)self.lastRadius];
+        }
+
+        [errorData setObject:message forKey:@"message"];
+        [errorData setObject:@(self.outdoorOnly) forKey:@"outdoorOnly"];
+        [errorData setObject:@(self.lastRadius) forKey:@"radius"];
+
         _onError(errorData);
     }
 }
@@ -135,10 +164,13 @@ static const float ZOOM_THRESHOLD = 0.1;    // zoom level
 }
 
 - (void)moveNearCoordinate:(CLLocationCoordinate2D)coordinate radius:(NSUInteger)radius {
+    // Store the radius for error reporting
+    _lastRadius = radius;
+
     // Use the appropriate source based on outdoorOnly flag
     GMSPanoramaSource source = self.outdoorOnly ? kGMSPanoramaSourceOutside : kGMSPanoramaSourceDefault;
 
-    // call the super implementation
+    // call the panorama move method
     [super moveNearCoordinate:coordinate radius:radius source:source];
 }
 
