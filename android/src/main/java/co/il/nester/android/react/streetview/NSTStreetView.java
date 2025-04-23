@@ -78,7 +78,12 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
     @Override
     public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
         this.panorama = panorama;
+
+        // Apply all gesture settings at once
         this.panorama.setPanningGesturesEnabled(allGesturesEnabled);
+        this.panorama.setZoomGesturesEnabled(allGesturesEnabled);
+        this.panorama.setUserNavigationEnabled(allGesturesEnabled);
+
         this.panorama.setStreetNamesEnabled(!streetNamesHidden);
 
         Context context = getContext();
@@ -212,8 +217,13 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
     }
 
     public void setAllGesturesEnabled(boolean allGesturesEnabled) {
-        // Saving to local variable as panorama may not be ready yet (async)
         this.allGesturesEnabled = allGesturesEnabled;
+        
+        if (this.panorama != null) {
+            this.panorama.setPanningGesturesEnabled(allGesturesEnabled);
+            this.panorama.setZoomGesturesEnabled(allGesturesEnabled);
+            this.panorama.setUserNavigationEnabled(allGesturesEnabled);
+        }
     }
 
     public void setStreetNamesHidden(boolean streetNamesHidden) {
@@ -277,5 +287,28 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
 
     public void setHasSuccessListener(boolean hasListener) {
         this.hasSuccessListener = hasListener;
+    }
+
+    public void setOrientationGestures(boolean enabled) {
+        if (this.panorama != null) {
+            this.panorama.setPanningGesturesEnabled(enabled);
+        }
+    }
+
+    public void setZoomGestures(boolean enabled) {
+        if (this.panorama != null) {
+            this.panorama.setZoomGesturesEnabled(enabled);
+        }
+    }
+
+    public void setNavigationGestures(boolean enabled) {
+        if (this.panorama != null) {
+            this.panorama.setUserNavigationEnabled(enabled);
+        }
+    }
+
+    // No-op for navigationLinksHidden (iOS only)
+    public void setNavigationLinksHidden(boolean hidden) {
+        // No equivalent in Android
     }
 }

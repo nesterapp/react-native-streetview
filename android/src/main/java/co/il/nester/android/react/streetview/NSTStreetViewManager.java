@@ -37,7 +37,7 @@ public class NSTStreetViewManager extends SimpleViewManager<NSTStreetView> {
     }
 
     @ReactProp(name = "streetNamesHidden", defaultBoolean = false)
-    public void setStreetNamesEnabled(NSTStreetView view, boolean streetNamesHidden) {
+    public void setStreetNamesHidden(NSTStreetView view, boolean streetNamesHidden) {
         view.setStreetNamesHidden(streetNamesHidden);
     }
 
@@ -74,6 +74,26 @@ public class NSTStreetViewManager extends SimpleViewManager<NSTStreetView> {
     @ReactProp(name = "onSuccess")
     public void setOnSuccessListener(NSTStreetView view, boolean hasListener) {
         view.setHasSuccessListener(hasListener);
+    }
+
+    @ReactProp(name = "orientationGestures", defaultBoolean = true)
+    public void setOrientationGestures(NSTStreetView view, boolean enabled) {
+        view.setOrientationGestures(enabled);
+    }
+
+    @ReactProp(name = "zoomGestures", defaultBoolean = true)
+    public void setZoomGestures(NSTStreetView view, boolean enabled) {
+        view.setZoomGestures(enabled);
+    }
+
+    @ReactProp(name = "navigationGestures", defaultBoolean = true)
+    public void setNavigationGestures(NSTStreetView view, boolean enabled) {
+        view.setNavigationGestures(enabled);
+    }
+
+    @ReactProp(name = "navigationLinksHidden", defaultBoolean = false)
+    public void setNavigationLinksHidden(NSTStreetView view, boolean hidden) {
+        // This is iOS-only, but include a no-op implementation for API consistency
     }
 
     @Override

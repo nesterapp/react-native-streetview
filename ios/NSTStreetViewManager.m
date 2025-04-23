@@ -71,6 +71,10 @@ RCT_EXPORT_VIEW_PROPERTY(onError, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onSuccess, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onPanoramaChange, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onPovChange, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(orientationGestures, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(zoomGestures, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(navigationGestures, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(navigationLinksHidden, BOOL)
 
 - (UIView *)view {
   NSTStreetView *panoView = [[NSTStreetView alloc] initWithFrame:CGRectZero];

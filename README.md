@@ -163,22 +163,33 @@ const YourComponent = () => (
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
+| **Location** |  |  |  |
 | `coordinate` | Object | `null` | Specify the latitude and longitude of the streetview location |
 | `coordinate.latitude` | Number | `0` | Latitude |
 | `coordinate.longitude` | Number | `0` | Longitude |
 | `coordinate.radius` | Number | `50` | Search radius in meters around the specified location. If no panorama is found at the exact coordinates, Google Street View will search for the closest panorama within this radius. |
+| **Display Options** |  |  |  |
+| `outdoorOnly` | Boolean | `false` | When true, limits Street View searches to outdoor panoramas only |
+| `streetNamesHidden` | Boolean | `false` | Whether to hide street names overlay |
+| **Camera** |  |  |  |
 | `pov` | Object | `null` | Camera point of view |
 | `pov.tilt` | Number | `0` | Camera tilt angle in degrees (0-90) |
 | `pov.bearing` | Number | `0` | Camera compass direction (0-360). 0 = north, 90 = east |
 | `pov.zoom` | Number | `0` | Camera zoom level (0-5) |
 | `heading` | Number | `0` | **Deprecated:** Use `pov.bearing` instead. Camera direction in degrees |
-| `allGesturesEnabled` | Boolean | `true` | Whether to enable user gestures |
-| `streetNamesHidden` | Boolean | `false` | Whether to hide street names |
+
+| **Gesture Controls** |  |  |  |
+| `allGesturesEnabled` | Boolean | `true` | Whether to enable all user gestures (panning, zooming, and navigation) |
+| `orientationGestures` | Boolean | `true` | Whether to enable panning gestures to change camera orientation |
+| `zoomGestures` | Boolean | `true` | Whether to enable pinch gestures to zoom the camera |
+| `navigationGestures` | Boolean | `true` | Whether to enable tap gestures to navigate between panoramas |
+| `navigationLinksHidden` | Boolean | `false` | Whether to hide the navigation links (iOS only) |
+
+| **Events** |  |  |  |
 | `onError` | Function | `null` | Callback when panorama cannot be found or errors occur |
 | `onSuccess` | Function | `null` | Callback when panorama is loaded successfully with the location coordinates |
 | `onPanoramaChange` | Function | `null` | Callback when the panorama view changes to a new location |
 | `onPovChange` | Function | `null` | Callback when the Point of View (camera orientation) changes |
-| `outdoorOnly` | Boolean | `false` | When true, limits Street View searches to outdoor panoramas only |
 
 ## Troubleshooting
 
