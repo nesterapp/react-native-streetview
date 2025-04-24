@@ -27,7 +27,6 @@ const propTypes = {
     bearing: PropTypes.number.isRequired,
     zoom: PropTypes.number.isRequired,
   }),
-  heading: PropTypes.number,
   // Gesture Controls
   allGesturesEnabled: PropTypes.bool,
   orientationGestures: PropTypes.bool,

@@ -205,15 +205,12 @@ const YourComponent = () => (
 | `pov.tilt` | Number | `0` | Camera tilt angle in degrees (0-90) |
 | `pov.bearing` | Number | `0` | Camera compass direction (0-360). 0 = north, 90 = east |
 | `pov.zoom` | Number | `0` | Camera zoom level (0-5) |
-| `heading` | Number | `0` | **Deprecated:** Use `pov.bearing` instead. Camera direction in degrees |
-
 | **Gesture Controls** |  |  |  |
 | `allGesturesEnabled` | Boolean | `true` | Whether to enable all user gestures (panning, zooming, and navigation) |
 | `orientationGestures` | Boolean | `true` | Whether to enable panning gestures to change camera orientation |
 | `zoomGestures` | Boolean | `true` | Whether to enable pinch gestures to zoom the camera |
 | `navigationGestures` | Boolean | `true` | Whether to enable tap gestures to navigate between panoramas |
 | `navigationLinksHidden` | Boolean | `false` | Whether to hide the navigation links (iOS only) |
-
 | **Events** |  |  |  |
 | `onError` | Function | `null` | Callback when panorama cannot be found or errors occur |
 | `onSuccess` | Function | `null` | Callback when panorama is loaded successfully with the location coordinates |

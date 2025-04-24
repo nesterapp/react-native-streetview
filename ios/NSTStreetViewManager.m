@@ -51,20 +51,6 @@ RCT_CUSTOM_VIEW_PROPERTY(pov, NSDictionary, NSTStreetView) {
   [view animateToCameraPosition:camera];
 }
 
-// heading property for backward compatibility (will be deprecated)
-RCT_CUSTOM_VIEW_PROPERTY(heading, CLLocationDegrees, NSTStreetView) {
-  if (json == nil) return;
-  
-  // Preserve existing camera pitch and zoom if possible
-  float pitch = view.camera ? view.camera.orientation.pitch : 0;  // Use orientation.pitch
-  float zoom = view.camera ? view.camera.zoom : 0;
-  
-  // Create and set camera
-  view.camera = [GMSPanoramaCamera cameraWithHeading:[RCTConvert CLLocationDegrees:json]
-                                              pitch:pitch
-                                               zoom:zoom];
-}
-
 RCT_CUSTOM_VIEW_PROPERTY(outdoorOnly, BOOL, NSTStreetView) {
   if (json == nil) return;
   view.outdoorOnly = [RCTConvert BOOL:json];
