@@ -39,7 +39,6 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
     private boolean hasPovChangeListener = false;
     private boolean hasPanoramaChangeListener = false;
     private boolean hasErrorListener = false;
-    private boolean hasSuccessListener = false;
 
     // Properties for tracking and thresholds
     private double lastTilt = 0;
@@ -134,36 +133,18 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
                 ReactContext reactContext = (ReactContext) getContext();
 
                 if (location != null) {
-                    // Only create position data if we need it
-                    WritableMap position = null;
-
                     // Send panorama change event only if listener exists
                     if (hasPanoramaChangeListener) {
                         WritableMap panoramaData = Arguments.createMap();
                         panoramaData.putString("panoId", location.panoId);
 
-                        position = Arguments.createMap();
+                        WritableMap position = Arguments.createMap();
                         position.putDouble("latitude", location.position.latitude);
                         position.putDouble("longitude", location.position.longitude);
                         panoramaData.putMap("position", position);
 
                         reactContext.getJSModule(RCTEventEmitter.class)
                             .receiveEvent(getId(), "onPanoramaChange", panoramaData);
-                    }
-                    
-                    // Keep existing onSuccess for backward compatibility, but only if listener exists
-                    if (hasSuccessListener) {
-                        WritableMap successData;
-                        if (position != null) {
-                            // Reuse the position object we created above
-                            successData = position;
-                        } else {
-                            successData = Arguments.createMap();
-                            successData.putDouble("latitude", location.position.latitude);
-                            successData.putDouble("longitude", location.position.longitude);
-                        }
-                        reactContext.getJSModule(RCTEventEmitter.class)
-                            .receiveEvent(getId(), "onSuccess", successData);
                     }
                 } else if (hasErrorListener) {
                     // Create minimal error payload with useful diagnostics
@@ -283,10 +264,6 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
 
     public void setHasErrorListener(boolean hasListener) {
         this.hasErrorListener = hasListener;
-    }
-
-    public void setHasSuccessListener(boolean hasListener) {
-        this.hasSuccessListener = hasListener;
     }
 
     public void setOrientationGestures(boolean enabled) {

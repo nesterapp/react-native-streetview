@@ -10,7 +10,6 @@
 
 @interface NSTStreetView : GMSPanoramaView <GMSPanoramaViewDelegate>
 @property (nonatomic,copy) RCTDirectEventBlock onError;
-@property (nonatomic,copy) RCTDirectEventBlock onSuccess;
 @property (nonatomic,copy) RCTDirectEventBlock onPanoramaChange;
 @property (nonatomic,copy) RCTDirectEventBlock onPovChange;
 @property (nonatomic, assign) BOOL outdoorOnly;

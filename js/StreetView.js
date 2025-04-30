@@ -35,7 +35,6 @@ const propTypes = {
   navigationLinksHidden: PropTypes.bool,
   // Events
   onError: PropTypes.func,
-  onSuccess: PropTypes.func,
   // Called when panorama changes
   onPanoramaChange: PropTypes.func,
   // Called when POV (camera orientation) changes
@@ -58,7 +57,6 @@ StreetView.propTypes = propTypes;
 const cfg = {
   nativeOnly: {
     onError: true,
-    onSuccess: true,
     onPanoramaChange: true,
     onPovChange: true,
   }

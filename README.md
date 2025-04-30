@@ -10,7 +10,7 @@ Google's StreetView component for React Native
 - 👆 Gesture controls for user interaction
 - 🔍 Configurable search radius to find nearby panoramas
 - 🏞️ Outdoor-only panorama option
-- 📊 Event callbacks for loading status, location changes, and camera movements (POV)
+- 📊 Event callbacks for errors, location changes, and camera movements (POV)
 - ✅ Compatible with React Native 0.79+ and Fabric architecture
 
 ## Preview
@@ -126,10 +126,6 @@ const YourComponent = () => (
     longitude: -122.4194,
     radius: 50
   }}
-  onSuccess={(event) => {
-    console.log('Panorama loaded successfully');
-    console.log('Coordinates:', event.nativeEvent);
-  }}
   onError={(errorEvent) => {
     // Access detailed error information
     const errorData = errorEvent.nativeEvent;
@@ -147,14 +143,15 @@ const YourComponent = () => (
   }}
   onPanoramaChange={(event) => {
     // When user navigates to a new panorama location
-    const panoramaData = event.nativeEvent;
+    const { position } = event.nativeEvent;
+    const { panoId } = event.nativeEvent;
     console.log('Panorama changed to new location:', {
-      latitude: panoramaData.latitude,
-      longitude: panoramaData.longitude
+      latitude: position.latitude,
+      longitude: position.longitude
     });
     // On iOS, may include additional Street View metadata
-    if (panoramaData.panoId) {
-      console.log('Panorama ID:', panoramaData.panoId);
+    if (panoId) {
+      console.log('Panorama ID:', panoId);
     }
   }}
   onPovChange={(event) => {
@@ -213,7 +210,6 @@ const YourComponent = () => (
 | `navigationLinksHidden` | Boolean | `false` | Whether to hide the navigation links (iOS only) |
 | **Events** |  |  |  |
 | `onError` | Function | `null` | Callback when panorama cannot be found or errors occur |
-| `onSuccess` | Function | `null` | Callback when panorama is loaded successfully with the location coordinates |
 | `onPanoramaChange` | Function | `null` | Callback when the panorama view changes to a new location |
 | `onPovChange` | Function | `null` | Callback when the Point of View (camera orientation) changes |
 

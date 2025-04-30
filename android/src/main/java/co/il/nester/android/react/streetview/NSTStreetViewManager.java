@@ -71,11 +71,6 @@ public class NSTStreetViewManager extends SimpleViewManager<NSTStreetView> {
         view.setHasErrorListener(hasListener);
     }
 
-    @ReactProp(name = "onSuccess")
-    public void setOnSuccessListener(NSTStreetView view, boolean hasListener) {
-        view.setHasSuccessListener(hasListener);
-    }
-
     @ReactProp(name = "orientationGestures", defaultBoolean = true)
     public void setOrientationGestures(NSTStreetView view, boolean enabled) {
         view.setOrientationGestures(enabled);
@@ -100,7 +95,6 @@ public class NSTStreetViewManager extends SimpleViewManager<NSTStreetView> {
     public @Nullable
     Map getExportedCustomDirectEventTypeConstants() {
         return MapBuilder.builder()
-            .put("onSuccess", MapBuilder.of("registrationName", "onSuccess"))
             .put("onError", MapBuilder.of("registrationName", "onError"))
             .put("onPanoramaChange", MapBuilder.of("registrationName", "onPanoramaChange"))
             .put("onPovChange", MapBuilder.of("registrationName", "onPovChange"))

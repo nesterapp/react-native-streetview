@@ -13,7 +13,6 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 public class NSTStreetViewEvent extends Event<NSTStreetViewEvent> {
 
     public static final int ON_ERROR = 1;
-    public static final int ON_SUCCESS = 2;
     public static final int ON_PANORAMA_CHANGE = 3;
     public static final int ON_POV_CHANGE = 4;
 
@@ -36,8 +35,6 @@ public class NSTStreetViewEvent extends Event<NSTStreetViewEvent> {
         switch (eventType) {
             case ON_ERROR:
                 return "onError";
-            case ON_SUCCESS:
-                return "onSuccess";
             case ON_PANORAMA_CHANGE:
                 return "onPanoramaChange";
             case ON_POV_CHANGE:

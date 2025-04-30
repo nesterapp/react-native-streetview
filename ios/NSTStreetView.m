@@ -104,14 +104,6 @@ static const float ZOOM_THRESHOLD = 0.1;    // zoom level
 
         _onPanoramaChange(panoramaData);
     }
-    
-    // Keep existing success callback for backward compatibility
-    if (_onSuccess && panorama != nil) {
-        NSNumber *lat = [[NSNumber alloc] initWithDouble:panorama.coordinate.latitude];
-        NSNumber *lng = [[NSNumber alloc] initWithDouble:panorama.coordinate.longitude];
-        NSDictionary *coord = @{@"latitude":lat, @"longitude":lng};
-        _onSuccess(@{@"coordinate":coord});
-    }
 }
 
 - (void)panoramaView:(GMSPanoramaView *)panoramaView didMoveCamera:(GMSPanoramaCamera *)camera {
@@ -149,15 +141,6 @@ static const float ZOOM_THRESHOLD = 0.1;    // zoom level
     }
 }
 
-- (void)panoramaViewDidFinishRendering:(GMSPanoramaView *)panoramaView
-{
-    if(_onSuccess) {
-        NSNumber *lat = [[NSNumber alloc] initWithDouble:panoramaView.panorama.coordinate.latitude];
-        NSNumber *lng = [[NSNumber alloc] initWithDouble:panoramaView.panorama.coordinate.longitude];
-        NSDictionary *coord = @{@"latitude":lat,@"longitude":lng};
-        _onSuccess(@{@"coordinate":coord});
-    }
-}
 
 - (void)animateToCameraPosition:(GMSPanoramaCamera *)camera {
     [self animateToCamera:camera animationDuration:1.0];
