@@ -1,1 +1,15 @@
-example
+assets/
+example/
+.github/
+.gitattributes
+.gitignore
+.watchmanconfig
+.idea/
+**/.idea/
+android/.idea/
+ios/.idea/
+**/*.iml
+*.log
+*.swp
+.DS_Store
+xcuserdata
