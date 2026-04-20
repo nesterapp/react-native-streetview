@@ -31,6 +31,15 @@ public class NSTStreetViewManager extends SimpleViewManager<NSTStreetView> {
         return new NSTStreetView(themedReactContext);
     }
 
+    @Override
+    public void onDropViewInstance(NSTStreetView view) {
+        // Must call the StreetViewPanoramaView lifecycle teardown before RN
+        // releases the view, otherwise the Google Maps SDK renderer/listeners
+        // leak and can crash on subsequent unmount/remount.
+        view.release();
+        super.onDropViewInstance(view);
+    }
+
     @ReactProp(name = "allGesturesEnabled", defaultBoolean = false)
     public void setAllGesturesEnabled(NSTStreetView view, boolean allGesturesEnabled) {
         view.setAllGesturesEnabled(allGesturesEnabled);

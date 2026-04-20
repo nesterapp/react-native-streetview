@@ -288,4 +288,30 @@ public class NSTStreetView extends StreetViewPanoramaView implements OnStreetVie
     public void setNavigationLinksHidden(boolean hidden) {
         // No equivalent in Android
     }
+
+    /**
+     * Tear down the underlying StreetViewPanoramaView. StreetViewPanoramaView
+     * is an Android ViewGroup with an explicit lifecycle (onCreate/onResume/
+     * onPause/onDestroy). The constructor calls onCreate + onResume, so we
+     * must mirror that with onPause + onDestroy when React Native drops this
+     * view instance — otherwise the native GL renderer and camera listeners
+     * leak, and subsequent unmount/remount cycles can crash inside the
+     * Google Maps SDK.
+     *
+     * Called from {@link NSTStreetViewManager#onDropViewInstance}.
+     */
+    public void release() {
+        try {
+            if (panorama != null) {
+                panorama.setOnStreetViewPanoramaCameraChangeListener(null);
+                panorama.setOnStreetViewPanoramaChangeListener(null);
+                panorama = null;
+            }
+            super.onPause();
+            super.onDestroy();
+        } catch (Exception ignored) {
+            // We are on the teardown path; swallow any SDK exceptions so we
+            // do not crash the RN view manager during unmount.
+        }
+    }
 }

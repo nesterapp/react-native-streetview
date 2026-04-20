@@ -157,4 +157,62 @@ static const float ZOOM_THRESHOLD = 0.1;    // zoom level
     [super moveNearCoordinate:coordinate radius:radius source:source];
 }
 
+#pragma mark - Teardown
+
+// Two distinct use-after-free bugs exist inside the Google Maps iOS SDK
+// (tested against GoogleMaps 9.x) when a GMSPanoramaView is released while
+// the user is interacting with it:
+//
+//   1. RENDER PATH — GMSPanoramaView drives rendering via an internal
+//      CADisplayLink. If the view is released before the next vsync, the
+//      display link can fire one more -drawFrame into a half-torn-down
+//      render graph, crashing at
+//      GMSx_geo_imagery_viewer::core::Photo::Traverse.
+//
+//   2. TILE PATH — GMSRocketTileService dispatches tile downloads on a
+//      background queue and does NOT cancel in-flight requests when the
+//      view is torn down. When a tile response returns after release, the
+//      completion block dereferences a freed
+//      GMSx_geo_imagery_viewer::api::RequestContainer, crashing at
+//      RequestContainer::OnComplete on a com.apple.root.background-qos
+//      dispatch queue.
+//
+// We mitigate both here:
+//
+//   • Hiding the view and nil-ing the delegate + RCTDirectEventBlock
+//     callbacks causes GMS to invalidate its CADisplayLink and ensures no
+//     late delegate callback lands on a dying view or dead JS emitter.
+//     This fixes (1).
+//
+//   • A keep-alive capture for 2s past removal keeps `self` — and
+//     therefore GMS's internal RequestContainer owned by this view —
+//     alive long enough for any pending tile fetch to complete against a
+//     valid object instead of freed memory. This fixes (2). 2s covers a
+//     normal tile round-trip; stale requests that take longer will time
+//     out cleanly inside GMS.
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    if (newWindow == nil) {
+        self.hidden = YES;
+        self.delegate = nil;
+        _onError = nil;
+        _onPanoramaChange = nil;
+        _onPovChange = nil;
+
+        NSTStreetView *keepAlive = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+                                     (int64_t)(2.0 * NSEC_PER_SEC)),
+                       dispatch_get_main_queue(), ^{
+            (void)keepAlive;
+        });
+    }
+    [super willMoveToWindow:newWindow];
+}
+
+- (void)dealloc {
+    // Defensive: the delegate is typically weak, but explicit nil-out here
+    // guarantees no in-flight GMS delegate callback dereferences `self` while
+    // it is being deallocated.
+    self.delegate = nil;
+}
+
 @end
