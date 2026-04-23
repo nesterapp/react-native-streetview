@@ -1,7 +1,7 @@
 # react-native-streetview [![npm version](https://img.shields.io/npm/v/react-native-streetview.svg?style=flat)](https://www.npmjs.com/package/react-native-streetview)
 
 Google's StreetView component for React Native  
-(iOS and Android supported)
+(iOS and Android supported; **Expo** is supported — see [Expo](#expo) below)
 
 ## Features
 
@@ -12,6 +12,7 @@ Google's StreetView component for React Native
 - 🏞️ Outdoor-only panorama option
 - 📊 Event callbacks for errors, location changes, and camera movements (POV)
 - ✅ Compatible with React Native 0.79+ and Fabric architecture
+- 📱 **Expo**: works with development builds and `expo prebuild` (native Google Maps / Street View setup still applies)
 
 ## Preview
 
@@ -28,6 +29,10 @@ yarn add react-native-streetview
 # or using npm
 npm install --save react-native-streetview
 ```
+
+### Expo
+
+This library ships native iOS and Android code, so use it with an [Expo development build](https://docs.expo.dev/develop/development-builds/introduction/) or a project using [`expo prebuild`](https://docs.expo.dev/workflow/prebuild/) (not Expo Go). Install the package as above, then configure your Google Maps API keys the same way as in the [iOS](#ios) and [Android](#android) sections (e.g. `app.json` / `app.config.js` plugins or config that set the native keys, depending on your setup).
 
 ### API Key Setup
 1. Generate an API Key at https://console.developers.google.com/apis/credentials
