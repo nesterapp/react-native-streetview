@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage     = package['homepage']
   s.platform     = :ios, "12.0"
 
-  s.source       = { :git => "https://github.com/nesterapp/react-native-streetview.git", :tag => "v#{s.version}" }
+  s.source       = { :git => "https://github.com/nesterapp/react-native-streetview.git", :tag => s.version.to_s }
   s.source_files  = "ios/**/*.{h,m}"
 
   s.dependency 'React-Core'
